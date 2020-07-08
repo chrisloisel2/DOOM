@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/07 06:57:47 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:23:54 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_recup_str(char *str)
 		i++;
 	while (ft_check(str[y]) == 0 && str[y] != '\0' && str[y] != '\n')
 		y++;
-	tmp = malloc(sizeof(char)* y + 1);
+	tmp = malloc(sizeof(char) * y + 1);
 	while (ft_check(str[i]) == 0 && str[i] != '\0' && str[y] != '\n')
 	{
 		tmp[i] = str[i];
@@ -32,19 +32,6 @@ char	*ft_recup_str(char *str)
 	}
 	tmp[i] = '\0';
 	return (tmp);
-}
-
-int		ft_recup_int(char *str)
-{
-	int		i;
-	int		y;
-	char	*tmp;
-
-	y = 0;
-	i = 0;
-	while (ft_check(str[i]))
-		i++;
-	return (ft_atoi(str + i));
 }
 
 void	ft_parse_nbr(parse_t *parse, char *line)
@@ -102,22 +89,25 @@ void	ft_parse_text(parse_t *parse, char *line)
 
 int		ft_parse(int fd, parse_t *parse)
 {
-	int i;
-	int j;
-	char *line;
+	int		i;
+	int		j;
+	char	*line;
 
 	j = 0;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		ft_parse_text(parse, line);
 		ft_parse_nbr(parse, line);
+		ft_scoot(parse, line);
 		j++;
 	}
-	printf("x =%d\ny =%d\n", parse->win_x, parse->win_y);
-	printf("no =%s\nso =%s\n", parse->no, parse->so);
-	printf("we =%s\nea =%s\n", parse->we, parse->ea);
-	printf("s =%s\n", parse->s);
-	printf("f1 =%d\nf2 =%d\nf3 =%d\n", parse->f1, parse->f2, parse->f3);
-	printf("c1 =%d\nc2 =%d\nc3 =%d\n", parse->c1, parse->c2, parse->c3);
+	ft_tb_made(parse);
+	ft_tb_fill(parse);
+	i = 0;
+	while (i < parse->taby)
+	{
+		printf("->%s\n", parse->tb[i]);
+		i++;
+	}
 	return (1);
 }

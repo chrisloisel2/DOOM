@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/07 05:49:27 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:18:36 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ typedef struct	parse_s
 {
 	int			win_x;
 	int			win_y;
+	int			ccolor;
+	int			fcolor;
+	int			taby;
+	int			x;
+	int			y;
 	int			f1;
 	int			f2;
 	int			f3;
@@ -44,9 +49,17 @@ typedef struct	parse_s
 	char 		*we;
 	char 		*ea;
 	char 		*s;
+	char 		*memory;
+	char 		**tb;
 }				parse_t;
 
 int				ft_check(char str);
 int				ft_parse(int fd, parse_t *parse);
+void			ft_putcolors(parse_t *parse);
+void			ft_init(data_t *data, parse_t *parse);
+void			ft_display(data_t *data, parse_t *parse);
+void			ft_scoot(parse_t *parse, char *line);
+void			ft_tb_made(parse_t *parse);
+void			ft_tb_fill(parse_t *parse);
 
 #endif
