@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:01:44 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/08 05:04:28 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:09:57 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_start(data_t *data, parse_t *parse)
 {
-	data->mlx_ptr = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx_ptr, parse->win_x, parse->win_y, "DOOM");
-	ft_display(data, parse);
-	mlx_loop(data->mlx_ptr);
+//	data->mlx_ptr = mlx_init();
+//	data->mlx_win = mlx_new_window(data->mlx_ptr, parse->win_x, parse->win_y, "DOOM");
+//	ft_display(data, parse);
+//	mlx_loop(data->mlx_ptr);
 }
 
 int		main(int argc, char **argv)

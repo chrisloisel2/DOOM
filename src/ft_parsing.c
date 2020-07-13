@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/08 05:23:54 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:48:22 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		ft_parse(int fd, parse_t *parse)
 	}
 	ft_tb_made(parse);
 	ft_tb_fill(parse);
+	ft_search_map(parse);
 	i = 0;
 	while (i < parse->taby)
 	{

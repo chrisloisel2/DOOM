@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/08 05:18:36 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:03:54 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ typedef struct	data_s
 	void		*mlx_ptr;
 	void		*mlx_win;
 }				data_t;
+
+typedef struct	map_s
+{
+	int			x;
+	int			y;
+	int			tracs;
+	int			savex;
+	int			savey;
+	int			ok;
+}				map_t;
 
 typedef struct	parse_s
 {
@@ -61,5 +71,6 @@ void			ft_display(data_t *data, parse_t *parse);
 void			ft_scoot(parse_t *parse, char *line);
 void			ft_tb_made(parse_t *parse);
 void			ft_tb_fill(parse_t *parse);
+void			ft_search_map(parse_t *parse);
 
 #endif
