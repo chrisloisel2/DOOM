@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/13 12:03:54 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/15 00:32:04 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	map_s
 {
 	int			x;
 	int			y;
+	int			error;
 	int			tracs;
 	int			savex;
 	int			savey;
