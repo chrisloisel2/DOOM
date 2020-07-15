@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/15 00:32:04 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/15 05:14:00 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ typedef struct	data_s
 
 typedef struct	map_s
 {
-	int			x;
+	int			max;
 	int			y;
+	int			x;
 	int			error;
 	int			tracs;
 	int			savex;
@@ -64,6 +65,14 @@ typedef struct	parse_s
 	char 		**tb;
 }				parse_t;
 
+typedef struct	user_s
+{
+	int			x;
+	int			y;
+	char		rot;
+}				user_t;
+
+
 int				ft_check(char str);
 int				ft_parse(int fd, parse_t *parse);
 void			ft_putcolors(parse_t *parse);
@@ -72,6 +81,11 @@ void			ft_display(data_t *data, parse_t *parse);
 void			ft_scoot(parse_t *parse, char *line);
 void			ft_tb_made(parse_t *parse);
 void			ft_tb_fill(parse_t *parse);
+void			ft_two(parse_t *parse, map_t *map);
+void			ft_one(parse_t *parse, map_t *map);
+void			ft_perfect_cube(parse_t *parse, map_t *map);
+int				ft_white_space(char c);
 void			ft_search_map(parse_t *parse);
+void			ft_map_check(parse_t *parse, map_t *map, user_t *user);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: lchristo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:59:06 by lchristo          #+#    #+#              #
-#    Updated: 2020/07/08 05:56:18 by lchristo         ###   ########.fr        #
+#    Updated: 2020/07/15 04:38:08 by lchristo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = src/main.c src/ft_printf.c		src/ft_puthexa.c		src/ft_putstr.c		src/ft_get.
 			src/ft_get_numbers.c	src/ft_strlen.c		src/ft_dot.c		src/ft_calculus.c\
 			src/ft_alpha.c		src/ft_minus.c			src/ft_zero.c		src/ft_flag.c\
 			src/get_next_line.c		src/get_next_line_utils.c				src/ft_parsing.c\
-			src/ft_color.c		src/ft_init.c			src/ft_scoot.c
+			src/ft_color.c		src/ft_init.c			src/ft_scoot.c		src/ft_maps.c
 
 
 MLX = minilibx
