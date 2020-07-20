@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/15 05:55:50 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/20 05:49:18 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,22 @@ void	ft_perfect_cube(parse_t *parse, map_t *map)
 	}
 }
 
-int		ft_get_player(char c, user_t *user)
+int		ft_get_player(char c, parse_t *parse)
 {
 	if (c == 'N')
-		user->rot = 'N';
+		parse->rot = 90;
 	if (c == 'E')
-		user->rot = 'E';
+		parse->rot = 180;
 	if (c == 'S')
-		user->rot = 'S';
+		parse->rot = -180;
 	if (c == 'W')
-		user->rot = 'W';
-	if (c == user->rot && c != '0')	
+		parse->rot = 0;
+	if (c == parse->rot && c != -1)	
 		return (1);
 	return (0);
 }
 
-void	ft_map_check(parse_t *parse, map_t *map, user_t *user)
+void	ft_map_check(parse_t *parse, map_t *map)
 {
 	int x;
 	int y;
@@ -130,11 +130,11 @@ void	ft_map_check(parse_t *parse, map_t *map, user_t *user)
 	{
 		while (x < map->max)
 		{
-			if (ft_get_player(parse->tb[y][x], user) == 1)
+			if (ft_get_player(parse->tb[y][x], parse) == 1)
 			{
 				r++;
-				user->x = x;
-				user->y = y;
+				parse->posx = x;
+				parse->posy = y;
 			}
 			(r > 1) ? map->error = 1 : 0;
 			x++;
@@ -142,5 +142,5 @@ void	ft_map_check(parse_t *parse, map_t *map, user_t *user)
 		x = 0;
 		y++;
 	}
-	(user->rot == '0') ? map->error = 1 : 0;
+	(parse->rot == -1) ? map->error = 1 : 0;
 }

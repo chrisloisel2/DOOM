@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/15 00:51:51 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/20 05:49:58 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_init(data_t *data, parse_t *parse)
 	parse->c1 = 0;
 	parse->c2 = 0;
 	parse->c3 = 0;
+	parse->rot = -1;
 	parse->memory = malloc(sizeof(char) * 1);
 	parse->memory[0] = '\0';
 	parse->no = malloc(sizeof(char) * 1);

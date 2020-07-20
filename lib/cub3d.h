@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/15 05:14:00 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/20 05:43:23 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,24 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <math.h>
 # include <unistd.h>
 # include <string.h>
 # include "ft_printf.h"
 #include "get_next_line.h"
 # include <mlx.h>
+
+#define W 13
+#define ESC 53
+#define A 0
+#define S 1
+#define D 2
+
+
+#define UP 126
+#define DOWN 125
+#define RIGHT 124
+#define LEFT 123
 
 typedef struct	data_s
 {
@@ -48,7 +61,10 @@ typedef struct	parse_s
 	int			ccolor;
 	int			fcolor;
 	int			taby;
+	float		rot;
 	int			x;
+	int			posy;
+	int			posx;
 	int			y;
 	int			f1;
 	int			f2;
@@ -65,14 +81,17 @@ typedef struct	parse_s
 	char 		**tb;
 }				parse_t;
 
-typedef struct	user_s
+typedef struct	t_s
 {
-	int			x;
-	int			y;
-	char		rot;
-}				user_t;
+	float		x;
+	float		y;
+	float 		rot;
+	float		mur;
+	float		regard;
+}				t_t;
 
 
+void			ft_screen(t_t *t);
 int				ft_check(char str);
 int				ft_parse(int fd, parse_t *parse);
 void			ft_putcolors(parse_t *parse);
@@ -86,6 +105,6 @@ void			ft_one(parse_t *parse, map_t *map);
 void			ft_perfect_cube(parse_t *parse, map_t *map);
 int				ft_white_space(char c);
 void			ft_search_map(parse_t *parse);
-void			ft_map_check(parse_t *parse, map_t *map, user_t *user);
+void			ft_map_check(parse_t *parse, map_t *map);
 
 #endif

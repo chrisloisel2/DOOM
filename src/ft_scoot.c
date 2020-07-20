@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 03:10:08 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/15 05:42:25 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/20 05:50:42 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,17 @@ int		ft_sniff(parse_t *parse, map_t *map)
 void	ft_search_map(parse_t *parse)
 {
 	map_t map;
-	user_t user;
 
 	map.x = 0;
 	map.y = 0;
 	map.ok = 0;
 	map.error = 0;
-	user.rot = '0';
-	user.x = 0;
-	user.y = 0;
+	parse->posx = 0;
+	parse->posy = 0;
 	ft_perfect_cube(parse, &map);
 	ft_one(parse, &map);
 	ft_two(parse, &map);
-	ft_map_check(parse, &map, &user);
+	ft_map_check(parse, &map);
 	ft_sniff(parse, &map);
 }
 
