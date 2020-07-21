@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/20 05:44:35 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:01:53 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_parse_text(parse_t *parse, char *line)
 	}
 }
 
-int		ft_parse(int fd, parse_t *parse)
+int		ft_parse(int fd, parse_t *parse, t_t *t)
 {
 	int		i;
 	int		j;
@@ -98,16 +98,16 @@ int		ft_parse(int fd, parse_t *parse)
 	{
 		ft_parse_text(parse, line);
 		ft_parse_nbr(parse, line);
-		ft_scoot(parse, line);
+		ft_scoot(parse, line, t);
 		j++;
 	}
-	ft_tb_made(parse);
-	ft_tb_fill(parse);
-	ft_search_map(parse);
+	ft_tb_made(parse, t);
+	ft_tb_fill(parse, t);
+	ft_search_map(parse, t);
 	i = 0;
-	while (i < parse->taby)
+	while (i < t->maxy)
 	{
-		printf("->%s\n", parse->tb[i]);
+		printf("->%s\n", t->tb[i]);
 		i++;
 	}
 	return (1);

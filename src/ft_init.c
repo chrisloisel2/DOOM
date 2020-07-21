@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/20 05:49:58 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/21 00:38:04 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,18 @@ void	ft_ceiling(data_t *data, parse_t *parse)
 	}
 }
 
-void	ft_display(data_t *data, parse_t *parse)
+void	ft_display(data_t *data, parse_t *parse, t_t *t)
 {
 	ft_putcolors(parse);
 	ft_ceiling(data, parse);
 	ft_floor(data, parse);
 }
 
-void	ft_init(data_t *data, parse_t *parse)
+void	ft_init(data_t *data, parse_t *parse, t_t *t)
 {
+	t->x = 0;
+	t->y = 0;
+	t->rot = 0;
 	parse->win_x = 0;
 	parse->win_y = 0;
 	parse->ccolor = 0;

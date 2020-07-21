@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 03:10:08 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/20 05:50:42 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:03:56 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_sniff(parse_t *parse, map_t *map)
 	}
 }
 
-void	ft_search_map(parse_t *parse)
+void	ft_search_map(parse_t *parse, t_t *t)
 {
 	map_t map;
 
@@ -34,16 +34,14 @@ void	ft_search_map(parse_t *parse)
 	map.y = 0;
 	map.ok = 0;
 	map.error = 0;
-	parse->posx = 0;
-	parse->posy = 0;
-	ft_perfect_cube(parse, &map);
-	ft_one(parse, &map);
-	ft_two(parse, &map);
-	ft_map_check(parse, &map);
+	ft_perfect_cube(parse, &map, t);
+	ft_one(parse, &map, t);
+	ft_two(parse, &map, t);
+	ft_map_check(parse, &map, t);
 	ft_sniff(parse, &map);
 }
 
-void	ft_tb_fill(parse_t *parse)
+void	ft_tb_fill(parse_t *parse, t_t *t)
 {
 	int i;
 	int ib;
@@ -52,14 +50,14 @@ void	ft_tb_fill(parse_t *parse)
 	i = 0;
 	y = 0;
 	ib = 0;
-	while (parse->memory[i] != '\0' && y < parse->taby)
+	while (parse->memory[i] != '\0' && y < t->maxy)
 	{
-		parse->tb[y][ib] = parse->memory[i];
+		t->tb[y][ib] = parse->memory[i];
 		ib++;
 		i++;
 		if (parse->memory[i] == '\n')
 		{
-			parse->tb[y][ib] = '\0';
+			t->tb[y][ib] = '\0';
 			ib = 0;
 			i++;
 			y++;
@@ -67,23 +65,23 @@ void	ft_tb_fill(parse_t *parse)
 	}
 }
 
-void	ft_tb_made(parse_t *parse)
+void	ft_tb_made(parse_t *parse, t_t *t)
 {
 	int i;
-	int t;
+	int p;
 	int y;
 
 	y = 0;
 	i = 0;
-	t = 0;
+	p = 0;
 	while (parse->memory[i] != '\0')
 	{
 		if (parse->memory[i] == '\n')
 			y++;
 		i++;
 	}
-	parse->taby = y;
-	parse->tb = malloc(sizeof(char *) * y + 1);
+	t->maxy = y;
+	t->tb = malloc(sizeof(char *) * y + 1);
 	i = 0;
 	y = 0;
 	while (parse->memory[i] != '\0')
@@ -93,14 +91,14 @@ void	ft_tb_made(parse_t *parse)
 			y++;
 			i++;
 		}
-		parse->tb[t] = malloc(sizeof(char) * y + 1);
+		t->tb[p] = malloc(sizeof(char) * y + 1);
 		y = 0;
 		i++;
-		t++;
+		p++;
 	}
 }
 
-void	ft_scoot(parse_t *parse, char *line)
+void	ft_scoot(parse_t *parse, char *line, t_t *t)
 {
 	int		i;
 	char	str[2];

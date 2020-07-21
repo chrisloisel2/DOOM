@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/20 05:43:23 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/21 02:11:28 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct	parse_s
 	int			win_y;
 	int			ccolor;
 	int			fcolor;
-	int			taby;
 	float		rot;
 	int			x;
 	int			posy;
@@ -78,33 +77,37 @@ typedef struct	parse_s
 	char 		*ea;
 	char 		*s;
 	char 		*memory;
-	char 		**tb;
 }				parse_t;
 
 typedef struct	t_s
 {
 	float		x;
 	float		y;
+	float		xray;
+	float		yray;
 	float 		rot;
 	float		mur;
 	float		regard;
+	char 		**tb;
+	int			maxy;
+	int			maxx;
 }				t_t;
 
 
 void			ft_screen(t_t *t);
 int				ft_check(char str);
-int				ft_parse(int fd, parse_t *parse);
+int				ft_parse(int fd, parse_t *parse, t_t *t);
 void			ft_putcolors(parse_t *parse);
-void			ft_init(data_t *data, parse_t *parse);
-void			ft_display(data_t *data, parse_t *parse);
-void			ft_scoot(parse_t *parse, char *line);
-void			ft_tb_made(parse_t *parse);
-void			ft_tb_fill(parse_t *parse);
-void			ft_two(parse_t *parse, map_t *map);
-void			ft_one(parse_t *parse, map_t *map);
-void			ft_perfect_cube(parse_t *parse, map_t *map);
+void			ft_init(data_t *data, parse_t *parse, t_t *t);
+void			ft_display(data_t *data, parse_t *parse, t_t *t);
+void			ft_scoot(parse_t *parse, char *line, t_t *t);
+void			ft_tb_made(parse_t *parse, t_t *t);
+void			ft_tb_fill(parse_t *parse, t_t *t);
+void			ft_two(parse_t *parse, map_t *map, t_t *t);
+void			ft_one(parse_t *parse, map_t *map, t_t *t);
+void			ft_perfect_cube(parse_t *parse, map_t *map, t_t *t);
 int				ft_white_space(char c);
-void			ft_search_map(parse_t *parse);
-void			ft_map_check(parse_t *parse, map_t *map);
+void			ft_search_map(parse_t *parse, t_t *t);
+void			ft_map_check(parse_t *parse, map_t *map, t_t *t);
 
 #endif

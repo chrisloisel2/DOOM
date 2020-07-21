@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/20 05:49:18 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:17:58 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,65 +20,65 @@ int		ft_white_space(char c)
 	return (0);
 }
 
-void	ft_two(parse_t *parse, map_t *map)
+void	ft_two(parse_t *parse, map_t *map, t_t *t)
 {
 	int x;
 	int y;
 
-	x = ft_strlen(parse->tb[y]) - 1;
+	x = ft_strlen(t->tb[y]) - 1;
 	y = 0;
-	while (y < parse->taby - 1)
+	while (y < t->maxy - 1)
 	{
-		while (x < ft_strlen(parse->tb[y]) && ft_white_space(parse->tb[y][x]))
+		while (x < ft_strlen(t->tb[y]) && ft_white_space(t->tb[y][x]))
 			x--;
-		if (parse->tb[y][x] != '1')
+		if (t->tb[y][x] != '1')
 			map->error = 1;
 		y++;
-		x = ft_strlen(parse->tb[y]) - 1;
+		x = ft_strlen(t->tb[y]) - 1;
 	}
-	y = parse->taby - 1;
+	y = t->maxy - 1;
 	x = 0;
-	while (x < ft_strlen(parse->tb[parse->taby - 1]))
+	while (x < ft_strlen(t->tb[t->maxy - 1]))
 	{
-		while (y > 1 && ft_white_space(parse->tb[y][x]))
+		while (y > 1 && ft_white_space(t->tb[y][x]))
 			y--;
-		if (y != 1 && parse->tb[y][x] != '1')
+		if (y != 1 && t->tb[y][x] != '1')
 			map->error = 1;
 		x++;
-		y = parse->taby - 1;
+		y = t->maxy - 1;
 	}
 }
 
-void	ft_one(parse_t *parse, map_t *map)
+void	ft_one(parse_t *parse, map_t *map, t_t *t)
 {
 	int x;
 	int y;
 
 	x = 0;
 	y = 0;
-	while (x < ft_strlen(parse->tb[0]))
+	while (x < ft_strlen(t->tb[0]))
 	{
-		while (y < parse->taby - 1 && ft_white_space(parse->tb[y][x]))
+		while (y < t->maxy - 1 && ft_white_space(t->tb[y][x]))
 			y++;
-		if (y < parse->taby - 1 && x < ft_strlen(parse->tb[y]) &&
-				parse->tb[y][x] != '1')
+		if (y < t->maxy - 1 && x < ft_strlen(t->tb[y]) &&
+				t->tb[y][x] != '1')
 			map->error = 1;
 		x++;
 		y = 0;
 	}
 	x = 0;
 	y = 0;
-	while (y < parse->taby - 1)
+	while (y < t->maxy - 1)
 	{
-		while (parse->tb[y][x] != '\0' && ft_white_space(parse->tb[y][x]))
+		while (t->tb[y][x] != '\0' && ft_white_space(t->tb[y][x]))
 			x++;
-		(parse->tb[y][x] != '1') ? map->error = 1 : 0;
+		(t->tb[y][x] != '1') ? map->error = 1 : 0;
 		x = 0;
 		y++;
 	}
 }
 
-void	ft_perfect_cube(parse_t *parse, map_t *map)
+void	ft_perfect_cube(parse_t *parse, map_t *map, t_t *t)
 {
 	int		i;
 	char	s[2];
@@ -86,38 +86,48 @@ void	ft_perfect_cube(parse_t *parse, map_t *map)
 	s[0] = ' ';
 	s[1] = '\0';
 	i = 0;
-	while (map->y < parse->taby - 1)
+	while (map->y < t->maxy - 1)
 	{
-		if (i < ft_strlen(parse->tb[map->y]))
-			i = ft_strlen(parse->tb[map->y]);
+		if (i < ft_strlen(t->tb[map->y]))
+			i = ft_strlen(t->tb[map->y]);
 		map->y++;
 	}
-	map->max = i;
+	t->maxx = i;
 	map->y = 0;
-	while (map->y < parse->taby)
+	while (map->y < t->maxy)
 	{
-		while (i > ft_strlen(parse->tb[map->y]))
-			parse->tb[map->y] = ft_strjoin(parse->tb[map->y], s);
+		while (i > ft_strlen(t->tb[map->y]))
+			t->tb[map->y] = ft_strjoin(t->tb[map->y], s);
 		map->y++;
 	}
 }
 
-int		ft_get_player(char c, parse_t *parse)
+int		ft_get_player(char c, t_t *t)
 {
 	if (c == 'N')
-		parse->rot = 90;
-	if (c == 'E')
-		parse->rot = 180;
-	if (c == 'S')
-		parse->rot = -180;
-	if (c == 'W')
-		parse->rot = 0;
-	if (c == parse->rot && c != -1)	
+	{
+		t->rot = 90;
 		return (1);
+	}
+	if (c == 'E')
+	{
+		t->rot = 180;
+		return (1);
+	}
+	if (c == 'S')
+	{
+		t->rot = -180;
+		return (1);
+	}
+	if (c == 'W')
+	{
+		t->rot = 0;
+		return (1);
+	}
 	return (0);
 }
 
-void	ft_map_check(parse_t *parse, map_t *map)
+void	ft_map_check(parse_t *parse, map_t *map, t_t *t)
 {
 	int x;
 	int y;
@@ -126,15 +136,15 @@ void	ft_map_check(parse_t *parse, map_t *map)
 	r = 0;
 	x = 0;
 	y = 0;
-	while (y < parse->taby - 1)
+	while (y < t->maxy - 1)
 	{
-		while (x < map->max)
+		while (x < t->maxx)
 		{
-			if (ft_get_player(parse->tb[y][x], parse) == 1)
+			if (ft_get_player(t->tb[y][x], t) == 1)
 			{
 				r++;
-				parse->posx = x;
-				parse->posy = y;
+				t->x = x;
+				t->y = y;
 			}
 			(r > 1) ? map->error = 1 : 0;
 			x++;
@@ -142,5 +152,5 @@ void	ft_map_check(parse_t *parse, map_t *map)
 		x = 0;
 		y++;
 	}
-	(parse->rot == -1) ? map->error = 1 : 0;
+	(r == 0) ? map->error = 1 : 0;
 }
