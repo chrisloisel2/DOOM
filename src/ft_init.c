@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 03:36:46 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 07:13:52 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	ft_display(data_t *data, parse_t *parse, t_t *t)
 
 void	ft_init(data_t *data, parse_t *parse, t_t *t)
 {
+	t->minray = 0;
+	t->maxray = 0;
 	t->x = 0;
 	t->y = 0;
 	t->rot = 0;

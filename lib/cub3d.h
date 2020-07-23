@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 03:36:26 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 07:12:24 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ typedef struct	t_s
 {
 	float		x;
 	float		y;
-	float		xray;
-	float		yray;
+	float		minray;
+	float		maxray;
 	float 		rot;
 	float		mur;
 	float		regard;
+	float		cam_distance;
 	char 		**tb;
 	int			maxy;
 	int			maxx;
@@ -91,7 +92,6 @@ typedef struct	t_s
 	char 		*ea;
 	char 		*s;
 }				t_t;
-
 
 void			ft_screen(t_t *t);
 int				ft_check(char str);
