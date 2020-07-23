@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/21 02:11:28 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 03:36:26 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,10 @@ typedef struct	map_s
 
 typedef struct	parse_s
 {
-	int			win_x;
-	int			win_y;
-	int			ccolor;
-	int			fcolor;
-	float		rot;
 	int			x;
 	int			posy;
 	int			posx;
 	int			y;
-	int			f1;
-	int			f2;
-	int			f3;
-	int			c1;
-	int			c2;
-	int			c3;
-	char 		*no;
-	char 		*so;
-	char 		*we;
-	char 		*ea;
-	char 		*s;
 	char 		*memory;
 }				parse_t;
 
@@ -91,13 +75,28 @@ typedef struct	t_s
 	char 		**tb;
 	int			maxy;
 	int			maxx;
+	int			win_x;
+	int			win_y;
+	int			ccolor;
+	int			fcolor;
+	int			f1;
+	int			f2;
+	int			f3;
+	int			c1;
+	int			c2;
+	int			c3;
+	char 		*no;
+	char 		*so;
+	char 		*we;
+	char 		*ea;
+	char 		*s;
 }				t_t;
 
 
 void			ft_screen(t_t *t);
 int				ft_check(char str);
 int				ft_parse(int fd, parse_t *parse, t_t *t);
-void			ft_putcolors(parse_t *parse);
+void			ft_putcolors(t_t *t);
 void			ft_init(data_t *data, parse_t *parse, t_t *t);
 void			ft_display(data_t *data, parse_t *parse, t_t *t);
 void			ft_scoot(parse_t *parse, char *line, t_t *t);

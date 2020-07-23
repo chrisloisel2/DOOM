@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/21 01:17:58 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 03:45:25 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,22 +106,22 @@ int		ft_get_player(char c, t_t *t)
 {
 	if (c == 'N')
 	{
-		t->rot = 90;
+		t->rot = M_PI/2;
 		return (1);
 	}
 	if (c == 'E')
 	{
-		t->rot = 180;
+		t->rot = 0;
 		return (1);
 	}
 	if (c == 'S')
 	{
-		t->rot = -180;
+		t->rot = (3 * M_PI)/2;
 		return (1);
 	}
 	if (c == 'W')
 	{
-		t->rot = 0;
+		t->rot = M_PI;
 		return (1);
 	}
 	return (0);

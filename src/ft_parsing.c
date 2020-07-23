@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/21 07:42:10 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 03:43:11 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_recup_str(char *str)
 	return (tmp);
 }
 
-void	ft_parse_nbr(parse_t *parse, char *line)
+void	ft_parse_nbr(t_t *t, char *line)
 {
 	int i;
 
@@ -43,47 +43,47 @@ void	ft_parse_nbr(parse_t *parse, char *line)
 	{
 		while (line[i - 1] != ' ' && line[i] != '\0')
 			i++;
-		parse->win_x = ft_atoi(line + i++);
+		t->win_x = ft_atoi(line + i++);
 		while (line[i - 1] != ' ' && line[i] != '\0')
 			i++;
-		parse->win_y = ft_atoi(line + i);
+		t->win_y = ft_atoi(line + i);
 	}
 	if (line[0] == 'C' && line[1] == ' ')
 	{
-		parse->c1 = ft_atoi(line + 2);
+		t->c1 = ft_atoi(line + 2);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		parse->c2 = ft_atoi(line + i++);
+		t->c2 = ft_atoi(line + i++);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		parse->c3 = ft_atoi(line + i);
+		t->c3 = ft_atoi(line + i);
 	}
 }
 
-void	ft_parse_text(parse_t *parse, char *line)
+void	ft_parse_text(t_t *t, char *line)
 {
 	int i;
 
 	i = 0;
 	if (line[0] == 'N' && line[1] == 'O')
-		parse->no = ft_recup_str(line + 3);
+		t->no = ft_recup_str(line + 3);
 	if (line[0] == 'S' && line[1] == 'O')
-		parse->so = ft_recup_str(line + 3);
+		t->so = ft_recup_str(line + 3);
 	if (line[0] == 'W' && line[1] == 'E')
-		parse->we = ft_recup_str(line + 3);
+		t->we = ft_recup_str(line + 3);
 	if (line[0] == 'E' && line[1] == 'A')
-		parse->ea = ft_recup_str(line + 3);
+		t->ea = ft_recup_str(line + 3);
 	if (line[0] == 'S' && line[1] == ' ')
-		parse->s = ft_recup_str(line + 2);
+		t->s = ft_recup_str(line + 2);
 	if (line[0] == 'F' && line[1] == ' ')
 	{
-		parse->f1 = ft_atoi(line + 2);
+		t->f1 = ft_atoi(line + 2);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		parse->f2 = ft_atoi(line + i++);
+		t->f2 = ft_atoi(line + i++);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		parse->f3 = ft_atoi(line + i);
+		t->f3 = ft_atoi(line + i);
 	}
 }
 
@@ -96,8 +96,8 @@ int		ft_parse(int fd, parse_t *parse, t_t *t)
 	j = 0;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-		ft_parse_text(parse, line);
-		ft_parse_nbr(parse, line);
+		ft_parse_text(t, line);
+		ft_parse_nbr(t, line);
 		ft_scoot(parse, line, t);
 		j++;
 	}

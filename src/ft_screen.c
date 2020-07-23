@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/22 06:21:21 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 04:24:53 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ void		ft_check_wall(t_t *t)
 	y = t->y + 0.5;
 	x = t->x + 0.5;
 	printf("rot = %f\n", t->rot);
-	t->rot = t->rot * (M_PI/180);
 	ya = (y - (int)y);
 	if (t->rot < 0)
 		ya = -ya;
-	printf("rot = %f  ya = %f (%f - %d)\n", t->rot, ya, y, (int)y);
+//	printf("rot = %f  ya = %f (%f - %d)\n", t->rot, ya, y, (int)y);
 	x1 = ya / tan(t->rot);
-	printf("rot = %f  x1= %f  (%f / %f)\n", t->rot, x1, ya, tan(t->rot));
+	x2 = (ya + 1) / tan(t->rot);
+//	printf("rot = %f  x1= %f  (%f / %f)\n", t->rot, x1, ya, tan(t->rot));
+	printf("rot = %f  x1= %f x2 = %f ya =%f\n", t->rot, x1, x2, ya);
 }
 
 void		ft_screen(t_t *t)
