@@ -6,36 +6,40 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 13:33:53 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 14:44:03 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-void		ft_check_horizontal_wall(t_t *t)
+void		ft_check_horizontal_wall(t_t *t, float rot)
 {
 	float 	ya;
-	float	yb;
 	float 	x1;
 	float 	x2;
-	double	i;
+	float 	xdiff;
 
-	printf("horizontal\n");
 	ya = (t->x - (int)t->x);
-	x1 = 0;
-	x2 = 0;
-	i = tan(t->rot);
+	x1 = ya / tan(rot);
+	ya++;
+	x2 = ya / tan(rot);
+	if (t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] == '0')
+		t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] = ' ';
+	if (t->tb[(int)(t->y + ya)][(int)(t->x + x1)] == '1')
+		return ;
+	while (t->tb[(int)(t->y + ya)][(int)(t->x + x2)] == '1')
+	{
+		if (t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] == '0')
+			t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] = ' ';
+		ya++;
+		x2 = ya / tan(rot);
+	}
 //	printf("x1 =%f ya(%f)/i(%f)\n", x1, ya, i);
-	if (t->rot == (float)M_PI || t->rot == (float)(0))
-		i = 1;
-	x1 = ya / i;
-//	printf("x1 =%f ya(%f)/i(%f)\n", x1, ya, i);
-	x2 = ya + 1 / i;
 //	printf("x2 =%f ya(%f)/i(%f)\n", x2, yb, i);
-	printf("rot = %f  x1= %.3f x2 = %.3f ya =%.3f\n", t->rot, x1, x2, ya);
+//	printf("rot = %f  x1= %.3f x2 = %.3f ya =%.3f\n", t->rot, x1, x2, ya);
 }
 
-void		ft_regular_line(t_t *t)
+void		ft_regular_line(t_t *t, float rot)
 {
 	float	x;
 	float	y;
@@ -55,56 +59,62 @@ void		ft_regular_line(t_t *t)
 		if (t->degre == 180)
 			x--;
 	}
-	x -= t->x;
-	y -= t->y;
-	printf("[%f][%f]\n", y, x);
 }
 
-void		ft_check_vertical_wall(t_t *t)
+void		ft_check_vertical_wall(t_t *t, float rot)
 {
 	float 	ya;
-	float	yb;
 	float 	x1;
 	float 	x2;
-	double	i;
+	float 	xdiff;
 
-	printf("vertical\n");
+//	printf("vertical\n");
 	ya = (t->y - (int)t->y);
-	x1 = 0;
-	x2 = 0;
-	i = tan(t->rot);
-	x1 = ya / i;
-	printf("x1 =%f ya(%f)/i(%f)\n", x1, ya, i);
-	x2 = ya + 1 / i;
-	printf("x2 =%f ya(%f)/i(%f)\n", x2, yb, i);
-	printf("rot = %f  x1= %.3f x2 = %.3f ya =%.3f\n", t->rot, x1, x2, ya);
+	x1 = ya / tan(rot);
+	if (t->tb[(int)(t->y + ya)][(int)(t->x + x1)] == '1')
+		return ;
+	ya++;
+	x2 = ya / tan(rot);
+	if (t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] == '0')
+		t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] = ' ';
+	while (t->tb[(int)(t->y + ya)][(int)(t->x + x2)] == '1')
+	{
+		if (t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] == '0')
+			t->tb[(int)(t->y + ya)][(int)(t->x + xdiff)] = ' ';
+		ya++;
+		x2 = ya / tan(rot);
+	}
+//	printf("x1 =%f ya(%f)/i(%f)\n", x1, ya, i);
+//	printf("x2 =%f ya(%f)/i(%f)\n", x2, yb, i);
+//	printf("rot = %f  x1= %.3f x2 = %.3f ya =%.3f\n", t->rot, x1, x2, ya);
 }
 
 void		ft_screen(t_t *t)
 {
-	int		centre;
+	float	angle;
 	float	min;
 	float	max;
 	int 	i;
+	int 	degre;
 
 	i = 0;
-	centre = t->win_x/2;
-	t->cam_distance = centre / tan(30);
-	t->maxray = t->rot + (30 * (M_PI/180));
+	t->cam_distance = (t->win_x/2) / tan(30);
 	t->minray = t->rot - (30 * (M_PI/180));
-	t->degre = t->rot * (180 / M_PI);
-
-//	t->y += 0.5;
-//	t->x += 0.5;
+	t->maxray = t->minray * (180 / M_PI);
+	degre = t->maxray;
+	angle = fmod(60, t->win_x);
+	printf("degré %d  minray = %f  angle =%.15f\n", degre, t->minray, angle);
 	while (i <= t->win_x)
 	{
-		if (t->degre == 90 || t->degre == 270 || t->degre == 0 || t->degre == 180)
-			ft_regular_line(t);
-		else if ((t->degre >= 45 && t->degre <= 135) || (t->degre >= 225 && t->degre <= 315))
-			ft_check_vertical_wall(t);
+		if (degre == 90 || degre == 270 || degre == 0 || degre == 180)
+			ft_regular_line(t, t->minray);
+		else if ((degre >= 45 && degre <= 135) || (degre >= 225 && degre <= 315))
+			ft_check_vertical_wall(t, t->minray);
 		else
-			ft_check_horizontal_wall(t);
-		t->minray += ((60/t->win_x) * M_PI / 180);
+			ft_check_horizontal_wall(t, t->minray);
+		t->minray = (angle * M_PI / 180);
+		t->maxray = t->minray * (180 / M_PI);
+		degre = (int)t->maxray;
 		i++;
 	}
 	i = 0;
