@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 07:12:24 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/23 12:45:31 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	parse_s
 
 typedef struct	t_s
 {
+	int		degre;
 	float		x;
 	float		y;
 	float		minray;
