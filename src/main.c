@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:01:44 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/21 01:01:02 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/25 08:29:10 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,80 @@
 
 int		ft_putkey(int c, t_t *t)
 {
-	printf("[%f, %f]\n", t->y, t->x);
-	if (c == W)
-		t->x += 0.25;
-	if (c == A)
-		t->y -= 0.25;
-	if (c == S)
-		t->x -= 0.25;
-	if (c == D)
-		t->y += 0.25;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	t->tb[(int)t->y][(int)t->x] = '0';
+	if (c == W && t->tb[(int)t->y - 1][(int)t->x] == '0')
+		t->y -= 1;
+	if (c == A && t->tb[(int)t->y][(int)t->x - 1] == '0')
+		t->x -= 1;
+	if (c == S && t->tb[(int)t->y + 1][(int)t->x] == '0')
+		t->y += 1;
+	if (c == D && t->tb[(int)t->y][(int)t->x + 1] == '0')
+		t->x += 1;
+	if (c == RIGHT)
+	{
+		if (t->rot >= (float)(2 * M_PI))
+			t->rot -= (float)(2*M_PI);
+		t->rot += (float)(20 * M_PI / 180);	
+	}
+	if (c == LEFT)
+	{
+		if (t->rot <= (float)(0))
+			t->rot += (float)(2*M_PI);
+		t->rot -= (float)(20 * M_PI / 180);	
+	}
+	t->tb[(int)t->y][(int)t->x] = 'O';
+	t->degre = t->rot * (180/M_PI);
+	system("clear");
+	printf("rot =%f, deg = %d\n", t->rot, t->degre);
+	ft_screen(t);
+	while (i < t->maxy)
+	{
+		printf("%s\n", t->tb[i]);
+		i++;
+	}
+	i = 0;
+	j = 0;
+	while (i < t->maxy)
+	{
+		while (j < t->maxx)
+		{
+			if (t->tb[i][j] == ' ')
+				t->tb[i][j] = '0';
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 	return (0);
 }
 
-void	ft_start(data_t *data, parse_t *parse, t_t *t)
+void	ft_start(parse_t *parse, t_t *t)
 {
-
-	printf("[%f, %f]\n", t->y, t->x);
 	ft_screen(t);
-//	data->mlx_ptr = mlx_init();
-//	data->mlx_win = mlx_new_window(data->mlx_ptr, parse->win_x, parse->win_y, "DOOM");
-//	ft_display(data, parse);
-//	mlx_hook(data->mlx_win, 2, 0, ft_putkey, &t);
-//	mlx_loop(data->mlx_ptr);
+	t->mlx_ptr = mlx_init();
+	t->mlx_win = mlx_new_window(t->mlx_ptr, t->win_x, t->win_y, "DOOM");
+	ft_display(t);
+	mlx_hook(t->mlx_win, 2, 0, ft_putkey, t);
+	mlx_loop(t->mlx_ptr);
 }
 
 int		main(int argc, char **argv)
 {
 	t_t			t;
-	data_t		data;
 	parse_t		parse;
 	int			fd;
 
 	fd = 0;
-	ft_init(&data, &parse, &t);
+	ft_init(&parse, &t);
 	if (!(fd = open(argv[1], O_RDONLY)))
 		ft_printf("map error");
 	if (argc == 2 && ft_parse(fd, &parse, &t) == 1)
-		ft_start(&data, &parse, &t);
+		ft_start(&parse, &t);
 	else
 		ft_printf("map error");
 	return (EXIT_SUCCESS);

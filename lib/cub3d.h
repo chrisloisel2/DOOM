@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 12:45:31 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/25 08:06:32 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@
 #define RIGHT 124
 #define LEFT 123
 
-typedef struct	data_s
-{
-	void		*mlx_ptr;
-	void		*mlx_win;
-}				data_t;
-
 typedef struct	map_s
 {
 	int			max;
@@ -65,6 +59,8 @@ typedef struct	parse_s
 
 typedef struct	t_s
 {
+	void		*mlx_ptr;
+	void		*mlx_win;
 	int		degre;
 	float		x;
 	float		y;
@@ -98,8 +94,8 @@ void			ft_screen(t_t *t);
 int				ft_check(char str);
 int				ft_parse(int fd, parse_t *parse, t_t *t);
 void			ft_putcolors(t_t *t);
-void			ft_init(data_t *data, parse_t *parse, t_t *t);
-void			ft_display(data_t *data, parse_t *parse, t_t *t);
+void			ft_init(parse_t *parse, t_t *t);
+void			ft_display(t_t *t);
 void			ft_scoot(parse_t *parse, char *line, t_t *t);
 void			ft_tb_made(parse_t *parse, t_t *t);
 void			ft_tb_fill(parse_t *parse, t_t *t);

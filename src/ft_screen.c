@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/24 03:18:17 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/25 08:35:37 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ void		ft_check_horizontal_wall(t_t *t, float rot)
 
 	xa = (t->x - (int)t->x);
 	y1 = xa * tan(rot);
-	//xdiff = t->x + y1;
 	xdiff = (t->degre > 90 || t->degre < -90) ? t->x - xa++ : t->x + xa;
 	ydiff = t->y + y1;
-	if (t->tb[ydiff][xdiff] == '0')
-		t->tb[ydiff][xdiff] = ' ';
-	xdiff = (t->degre > 90 || t->degre < -90) ? t->x - xa++ : t->x + xa++;
-	y2 = xa * tan(rot);
-	ydiff = t->y + y2;
+	if (t->tb[(int)ydiff][(int)xdiff] == '0')
+		t->tb[(int)ydiff][(int)xdiff] = ' ';
+	printf("horizontal");
+//	xdiff = (t->degre > 90 || t->degre < -90) ? t->x - xa++ : t->x + xa++;
+//	y2 = xa * tan(rot);
+//	ydiff = t->y + y2;
 	while (t->tb[ydiff][xdiff] != '1' && xdiff > 0 && xdiff < t->maxx)
 	{
+		if (t->tb[(int)ydiff][(int)xdiff] == '0')
+			t->tb[(int)ydiff][(int)xdiff] = ' ';
 		xdiff = (t->degre > 90 || t->degre < -90) ? t->x - xa++ : t->x + xa++;
 		y2 = xa * tan(rot);
 		ydiff = t->y + y2;
-		if (t->tb[ydiff][xdiff] == '0')
-			t->tb[ydiff][xdiff] = ' ';
 	}
 }
 
@@ -48,22 +48,23 @@ void		ft_check_vertical_wall(t_t *t, float rot)
 	int 	xdiff;
 	int 	ydiff;
 
+	printf("vertical");
 	ya = (t->y - (int)t->y);
+	ydiff = (t->degre < 180) ? t->y - ya : t->y + ya;
 	x1 = ya / tan(rot);
 	xdiff = t->x + x1;
-	ydiff = (t->degre < 180) ? t->y - ya : t->y + ya;
-	if (t->tb[ydiff][xdiff] == '0')
-		t->tb[ydiff][xdiff] = ' ';
-	ydiff = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
-	x2 = ya / tan(rot);
-	xdiff = t->x + x2;
+	if (t->tb[(int)ydiff][(int)xdiff] == '0')
+		t->tb[(int)ydiff][(int)xdiff] = ' ';
+//	ydiff = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
+//	x2 = ya / tan(rot);
+//	xdiff = t->x + x2;
 	while (t->tb[ydiff][xdiff] != '1')
 	{
+		if (t->tb[(int)ydiff][(int)xdiff] == '0')
+			t->tb[(int)ydiff][(int)xdiff] = ' ';
 		ydiff = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
 		x2 = ya / tan(rot);
 		xdiff = t->x + x2;
-		if (t->tb[ydiff][xdiff] == '0')
-			t->tb[ydiff][xdiff] = ' ';
 	}
 }
 
@@ -101,8 +102,6 @@ void		ft_screen(t_t *t)
 	t->cam_distance = (t->win_x/2) / tan(30);
 	t->minray = t->rot - (30 * (M_PI/180));
 	t->maxray = t->minray * (180 / M_PI);
-	t->x += 0.5;
-	t->y += 0.5;
 	degre = t->maxray;
 	angle = 60.0/t->win_x;
 	t->degre = degre;
@@ -118,12 +117,6 @@ void		ft_screen(t_t *t)
 		t->maxray = t->minray * (180.0 / M_PI);
 		degre = t->maxray;
 		t->degre = degre;
-		i++;
-	}
-	i = 0;
-	while (i < t->maxy)
-	{
-		printf("%s\n", t->tb[i]);
 		i++;
 	}
 }

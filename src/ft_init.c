@@ -6,13 +6,13 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 07:13:52 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/25 06:10:13 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-void	ft_floor(data_t *data, t_t *t)
+void	ft_floor(t_t *t)
 {
 	int i;
 	int y;
@@ -23,7 +23,7 @@ void	ft_floor(data_t *data, t_t *t)
 	{
 		while (y <= t->win_y)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, y, i, t->fcolor);
+			mlx_pixel_put(t->mlx_ptr, t->mlx_win, y, i, t->fcolor);
 			y++;
 		}
 		y = 0;
@@ -31,7 +31,7 @@ void	ft_floor(data_t *data, t_t *t)
 	}
 }
 
-void	ft_ceiling(data_t *data, t_t *t)
+void	ft_ceiling(t_t *t)
 {
 	int i;
 	int y;
@@ -42,7 +42,7 @@ void	ft_ceiling(data_t *data, t_t *t)
 	{
 		while (y <= t->win_y)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, y, i, t->ccolor);
+			mlx_pixel_put(t->mlx_ptr, t->mlx_win, y, i, t->ccolor);
 			y++;
 		}
 		y = 0;
@@ -50,14 +50,14 @@ void	ft_ceiling(data_t *data, t_t *t)
 	}
 }
 
-void	ft_display(data_t *data, parse_t *parse, t_t *t)
+void	ft_display(t_t *t)
 {
 	ft_putcolors(t);
-	ft_ceiling(data, t);
-	ft_floor(data, t);
+	ft_ceiling(t);
+	ft_floor(t);
 }
 
-void	ft_init(data_t *data, parse_t *parse, t_t *t)
+void	ft_init(parse_t *parse, t_t *t)
 {
 	t->minray = 0;
 	t->maxray = 0;
