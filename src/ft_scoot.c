@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 03:10:08 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/23 03:42:53 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/27 08:04:14 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_tb_fill(parse_t *parse, t_t *t)
 	ib = 0;
 	while (parse->memory[i] != '\0' && y < t->maxy)
 	{
+		if (t->demimap == t->maxy && parse->memory[i] == ' ')
+			i ++;
 		t->tb[y][ib] = parse->memory[i];
 		ib++;
 		i++;
@@ -91,6 +93,8 @@ void	ft_tb_made(parse_t *parse, t_t *t)
 			y++;
 			i++;
 		}
+		if (t->demimap == t->maxy)
+			y = y/2;;
 		t->tb[p] = malloc(sizeof(char) * y + 1);
 		y = 0;
 		i++;
@@ -106,6 +110,12 @@ void	ft_scoot(parse_t *parse, char *line, t_t *t)
 
 	str[0] = '\n';
 	str[1] = '\0';
+	i = 1;
+	while (line[i] != '\0' && line[i + 2] == line[i] && line[i] == ' ')
+		i += 2;
+	if (i == ft_strlen(line) - 2)
+		t->demimap++;
+	printf("demimap = %d\n", t->demimap);
 	i = 0;
 	while (ft_white_space(line[i]))
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/25 06:10:13 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/27 07:46:21 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_display(t_t *t)
 
 void	ft_init(parse_t *parse, t_t *t)
 {
+	t->demimap = 0;
 	t->minray = 0;
 	t->maxray = 0;
 	t->x = 0;

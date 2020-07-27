@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:01:44 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/27 06:18:59 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/27 08:04:37 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		ft_putkey(int c, t_t *t)
 	t->tb[(int)t->y][(int)t->x] = 'O';
 	t->degre = t->rot * (180/M_PI);
 	system("clear");
-	printf("rot =%f, deg = %d\n", t->rot, t->degre);
 	ft_screen(t);
 	while (i < t->maxy)
 	{

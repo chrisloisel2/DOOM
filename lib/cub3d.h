@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/25 08:06:32 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/27 07:42:17 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ typedef struct	t_s
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
-	int		degre;
+	int			demimap;
+	int			degre;
 	float		x;
 	float		y;
 	float		minray;
