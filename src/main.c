@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:01:44 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/25 08:29:10 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/27 06:18:59 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,13 @@ int		ft_putkey(int c, t_t *t)
 	if (c == D && t->tb[(int)t->y][(int)t->x + 1] == '0')
 		t->x += 1;
 	if (c == RIGHT)
-	{
-		if (t->rot >= (float)(2 * M_PI))
-			t->rot -= (float)(2*M_PI);
-		t->rot += (float)(20 * M_PI / 180);	
-	}
+		t->rot -= (float)(5 * M_PI / 180);	
 	if (c == LEFT)
-	{
-		if (t->rot <= (float)(0))
-			t->rot += (float)(2*M_PI);
-		t->rot -= (float)(20 * M_PI / 180);	
-	}
+		t->rot += (float)(5 * M_PI / 180);	
+	if (t->rot > (float)(2 * M_PI))
+		t->rot -= (float)(2*M_PI);
+	if (t->rot < (float)(0))
+		t->rot += (float)(2*M_PI);
 	t->tb[(int)t->y][(int)t->x] = 'O';
 	t->degre = t->rot * (180/M_PI);
 	system("clear");
