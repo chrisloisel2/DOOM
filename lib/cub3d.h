@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/27 07:42:17 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/28 15:53:07 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct	t_s
 	float 		rot;
 	float		mur;
 	float		regard;
+	float		mury;
+	float		murx;
 	float		cam_distance;
 	char 		**tb;
 	int			maxy;
@@ -106,5 +108,8 @@ void			ft_perfect_cube(parse_t *parse, map_t *map, t_t *t);
 int				ft_white_space(char c);
 void			ft_search_map(parse_t *parse, t_t *t);
 void			ft_map_check(parse_t *parse, map_t *map, t_t *t);
+void			ft_collomn(t_t *t, int i);
+void			ft_ceiling(t_t *t);
+void			ft_floor(t_t *t);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:01:44 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/27 08:04:37 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/28 16:13:42 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 int		ft_putkey(int c, t_t *t)
 {
-	int i;
-	int j;
-
-	j = 0;
-	i = 0;
 	t->tb[(int)t->y][(int)t->x] = '0';
 	if (c == W && t->tb[(int)t->y - 1][(int)t->x] == '0')
 		t->y -= 1;
@@ -29,43 +24,24 @@ int		ft_putkey(int c, t_t *t)
 	if (c == D && t->tb[(int)t->y][(int)t->x + 1] == '0')
 		t->x += 1;
 	if (c == RIGHT)
-		t->rot -= (float)(5 * M_PI / 180);	
+		t->rot -= (float)(40 * M_PI / 180);	
 	if (c == LEFT)
-		t->rot += (float)(5 * M_PI / 180);	
+		t->rot += (float)(40 * M_PI / 180);	
 	if (t->rot > (float)(2 * M_PI))
 		t->rot -= (float)(2*M_PI);
 	if (t->rot < (float)(0))
 		t->rot += (float)(2*M_PI);
 	t->tb[(int)t->y][(int)t->x] = 'O';
 	t->degre = t->rot * (180/M_PI);
-	system("clear");
 	ft_screen(t);
-	while (i < t->maxy)
-	{
-		printf("%s\n", t->tb[i]);
-		i++;
-	}
-	i = 0;
-	j = 0;
-	while (i < t->maxy)
-	{
-		while (j < t->maxx)
-		{
-			if (t->tb[i][j] == ' ')
-				t->tb[i][j] = '0';
-			j++;
-		}
-		j = 0;
-		i++;
-	}
 	return (0);
 }
 
 void	ft_start(parse_t *parse, t_t *t)
 {
-	ft_screen(t);
 	t->mlx_ptr = mlx_init();
 	t->mlx_win = mlx_new_window(t->mlx_ptr, t->win_x, t->win_y, "DOOM");
+	ft_screen(t);
 	ft_display(t);
 	mlx_hook(t->mlx_win, 2, 0, ft_putkey, t);
 	mlx_loop(t->mlx_ptr);

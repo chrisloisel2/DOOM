@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/27 07:02:18 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/28 15:19:51 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ void		ft_check_horizontal_wall(t_t *t, float rot)
 	y1 = xa * tan(rot);
 	xdiff = (t->degre > 90 && t->degre < 270) ? t->x - xa++ : t->x + xa;
 	ydiff = t->y + y1;
-	if (t->tb[(int)ydiff][(int)xdiff] == '0')
-		t->tb[(int)ydiff][(int)xdiff] = ' ';
 	while (t->tb[ydiff][xdiff] != '1' && xdiff > 0 && xdiff < t->maxx)
 	{
 		xdiff = (t->degre > 90 && t->degre < 270) ? t->x - xa++ : t->x + xa++;
 		y2 = xa * tan(rot);
 		ydiff = t->y + y2;
-		if (t->tb[(int)ydiff][(int)xdiff] == '0')
-			t->tb[(int)ydiff][(int)xdiff] = ' ';
 	}
+	t->murx = xdiff;
+	t->mury = ydiff;
 }
 
 void		ft_check_vertical_wall(t_t *t, float rot)
@@ -52,16 +50,14 @@ void		ft_check_vertical_wall(t_t *t, float rot)
 	ydiff = (t->degre < 180) ? t->y + ya : t->y - ya;
 	x1 = ya / tan(rot);
 	xdiff = t->x + x1;
-	if (t->tb[(int)ydiff][(int)xdiff] == '0')
-		t->tb[(int)ydiff][(int)xdiff] = ' ';
 	while (t->tb[ydiff][xdiff] != '1')
 	{
 		ydiff = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
 		x2 = ya / tan(rot);
 		xdiff = t->x + x2;
-		if (t->tb[(int)ydiff][(int)xdiff] == '0')
-			t->tb[(int)ydiff][(int)xdiff] = ' ';
 	}
+	t->murx = xdiff;
+	t->mury = ydiff;
 }
 
 void		ft_regular_line(t_t *t, float rot)
@@ -73,8 +69,6 @@ void		ft_regular_line(t_t *t, float rot)
 	y = t->y;
 	while (t->tb[(int)y][(int)x] != '1')	
 	{
-		if (t->tb[(int)y][(int)x] == '0')
-			t->tb[(int)y][(int)x] = ' ';
 		if (rot == 90)
 			y--;
 		if (rot == 270)
@@ -84,6 +78,8 @@ void		ft_regular_line(t_t *t, float rot)
 		if (rot == 180)
 			x--;
 	}
+	t->murx = x;
+	t->mury = y;
 }
 
 void		ft_screen(t_t *t)
@@ -92,31 +88,25 @@ void		ft_screen(t_t *t)
 	float	min;
 	float	max;
 	int 	i;
-	int 	degre;
 
 	i = 0;
 	t->cam_distance = (t->win_x/2) / tan(20);
 	t->minray = t->rot - (20 * (M_PI/180));
-	t->maxray = t->minray * (180 / M_PI);
-	degre = t->maxray;
+	t->degre = t->minray * (180 / M_PI);
 	angle = 40.0/t->win_x;
-	t->degre = degre;
 	while (i <= t->win_x)
 	{
-		if (t->minray >= (float)(2 * M_PI))
-			t->minray -= (float)(2*M_PI);
-		if (t->minray <= (float)(0))
-			t->minray = (float)(2*M_PI) ;
-		if (degre == 90 || degre == 270 || degre == 0 || degre == 180)
-			ft_regular_line(t, degre);
-		else if ((degre >= 45 && degre <= 135) || (degre >= 225 && degre <= 315))
+		(t->minray >= (float)(2 * M_PI)) ? t->minray -= (float)(2*M_PI) : 0;
+		(t->minray <= (float)(0)) ? t->minray = (float)(2*M_PI)  : 0;
+		if (t->degre == 90 || t->degre == 270 || t->degre == 0 || t->degre == 180)
+			ft_regular_line(t, t->degre);
+		else if ((t->degre >= 45 && t->degre <= 135) || (t->degre >= 225 && t->degre <= 315))
 			ft_check_vertical_wall(t, t->minray);
 		else
 			ft_check_horizontal_wall(t, t->minray);
+		ft_collomn(t, i);
 		t->minray += (angle * M_PI / 180.0);
-		t->maxray = t->minray * (180.0 / M_PI);
-		degre = t->maxray;
-		t->degre = degre;
+		t->degre = t->minray * (180.0 / M_PI);
 		i++;
 	}
 }
