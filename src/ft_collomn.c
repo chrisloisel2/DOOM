@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:39:34 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/28 16:13:21 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/28 18:20:54 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_collomn(t_t *t, int i)
 	}
 	while (hauteur > 0)
 	{
-		mlx_pixel_put(t->mlx_ptr, t->mlx_win, i, (int)((t->win_y / 2) - hauteur), 0xfffe00);
+		mlx_pixel_put(t->mlx_ptr, t->mlx_win, i, (int)((t->win_y / 2) - hauteur), 0xff0000);
 		hauteur--;
 	}
 }

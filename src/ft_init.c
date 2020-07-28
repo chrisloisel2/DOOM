@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/28 15:57:04 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/28 18:48:32 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ void	ft_ceiling(t_t *t)
 
 void	ft_display(t_t *t)
 {
+	int huit;
+	int un;
+
+	un = 1;
+	huit = 8;
+
+	t->image = mlx_new_image(t->mlx_ptr, t->win_x, t->win_y);
+	t->si = mlx_get_data_addr(t->image, &huit, &t->win_x, &un);
 	ft_putcolors(t);
 	ft_ceiling(t);
 	ft_floor(t);
@@ -59,6 +67,7 @@ void	ft_display(t_t *t)
 
 void	ft_init(parse_t *parse, t_t *t)
 {
+	t->image = 0;
 	t->demimap = 0;
 	t->minray = 0;
 	t->maxray = 0;
