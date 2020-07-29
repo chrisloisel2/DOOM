@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 03:10:08 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/27 08:04:14 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/29 12:42:25 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	ft_scoot(parse_t *parse, char *line, t_t *t)
 		i += 2;
 	if (i == ft_strlen(line) - 2)
 		t->demimap++;
-	printf("demimap = %d\n", t->demimap);
 	i = 0;
 	while (ft_white_space(line[i]))
 		i++;

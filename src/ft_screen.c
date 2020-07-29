@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/28 18:20:57 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:32:15 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		ft_check_vertical_wall(t_t *t, float rot)
 	ydiff = (t->degre < 180) ? t->y + ya : t->y - ya;
 	x1 = ya / tan(rot);
 	xdiff = t->x + x1;
-	while (t->tb[ydiff][xdiff] != '1')
+	while (t->tb[ydiff][xdiff] != '1' && ydiff < t->maxy && xdiff < t->maxx)
 	{
 		ydiff = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
 		x2 = ya / tan(rot);

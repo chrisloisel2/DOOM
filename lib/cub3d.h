@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/28 18:45:15 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/29 14:24:40 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct	t_s
 	void		*mlx_ptr;
 	void		*mlx_win;
 	void		*image;
-	char		*si;
+	unsigned int 		*si;
 	int			demimap;
 	int			degre;
 	float		x;
@@ -113,5 +113,6 @@ void			ft_map_check(parse_t *parse, map_t *map, t_t *t);
 void			ft_collomn(t_t *t, int i);
 void			ft_ceiling(t_t *t);
 void			ft_floor(t_t *t);
+int				ft_putkey(int c, t_t *t);
 
 #endif

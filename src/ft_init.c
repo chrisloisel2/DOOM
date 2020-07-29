@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 01:27:21 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/28 18:48:32 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/29 14:19:00 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,44 @@
 void	ft_floor(t_t *t)
 {
 	int i;
+	int i2;
 	int y;
 
-	y = 0;
-	i = t->win_x / 2;
-	while (i <= t->win_x)
+	i2 = 0;
+	y = t->win_y / 2;
+	i = t->win_x * y;
+	while (y < t->win_y)
 	{
-		while (y <= t->win_y)
+		while (i2 < t->win_x)
 		{
-			mlx_pixel_put(t->mlx_ptr, t->mlx_win, y, i, t->fcolor);
-			y++;
+			t->si[i] = t->fcolor;
+			i++;
+			i2++;
 		}
-		y = 0;
-		i++;
+		i2 = 0;
+		y++;
 	}
 }
 
 void	ft_ceiling(t_t *t)
 {
 	int i;
+	int i2;
 	int y;
 
+	i2 = 0;
 	y = 0;
 	i = 0;
-	while (i <= t->win_x / 2)
+	while (y < t->win_y / 2)
 	{
-		while (y <= t->win_y)
+		while (i2 < t->win_x)
 		{
-			mlx_pixel_put(t->mlx_ptr, t->mlx_win, y, i, t->ccolor);
-			y++;
+			t->si[i] = t->ccolor;
+			i++;
+			i2++;
 		}
-		y = 0;
-		i++;
+		i2 = 0;
+		y++;
 	}
 }
 
@@ -54,12 +60,13 @@ void	ft_display(t_t *t)
 {
 	int huit;
 	int un;
+	int sl;
 
 	un = 1;
-	huit = 8;
-
+	huit = 3;
+	sl = t->win_x;
 	t->image = mlx_new_image(t->mlx_ptr, t->win_x, t->win_y);
-	t->si = mlx_get_data_addr(t->image, &huit, &t->win_x, &un);
+	t->si = (unsigned int *)mlx_get_data_addr(t->image, &huit, &sl, &un);
 	ft_putcolors(t);
 	ft_ceiling(t);
 	ft_floor(t);

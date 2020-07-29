@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:39:34 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/28 18:20:54 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:09:33 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ void	ft_collomn(t_t *t, int i)
 	disty = t->y - t->mury;
 	dist = pow(distx, 2) + pow(disty, 2);	
 	hauteur = (t->cam_distance * 300) / dist;
-	while (h > hauteur)
+	while (i < t->win_x * ((t->win_y / 2) - (hauteur / 2)))
 	{
-		mlx_pixel_put(t->mlx_ptr, t->mlx_win, i, h, t->fcolor);
-		h--;
-	}
-	h = 0;
-	while (h < t->win_y / 2)
-	{
-		mlx_pixel_put(t->mlx_ptr, t->mlx_win, i, h, t->ccolor);
-		h++;
+		t->si[i] = t->fcolor;
+		i += t->win_x;
 	}
 	while (hauteur > 0)
 	{
-		mlx_pixel_put(t->mlx_ptr, t->mlx_win, i, (int)((t->win_y / 2) - hauteur), 0xff0000);
+		t->si[i] = 0xff0096;
 		hauteur--;
+		i += t->win_x;
 	}
+	while (i < (t->win_x * t->win_y))
+	{
+		t->si[i] = t->ccolor;
+		i += t->win_x;
+	}
+	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image, 0, 0);
 }
