@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:23:54 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/29 15:56:49 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/06 16:42:28 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void		ft_horizontal(t_t *t, float rot, int degre)
 
 	if (degre < 45 || degre > 315)
 		rot = M_PI - rot;
-	xa = (t->x - (int)t->x);
+	xa = 1;
 	y1 = xa * tan(rot);
-	xdiff = (degre > 90 && degre < 270) ? t->x - xa++ : t->x + xa;
+	xdiff = (degre > 90 && degre < 270) ? t->x - xa : t->x + xa;
 	ydiff = t->y + y1;
 	while (xa < 2)
 	{
@@ -46,7 +46,7 @@ void		ft_vertical(t_t *t, float rot, int degre)
 
 	if (degre > 180)
 		rot = M_PI - rot;
-	ya = (t->y - (int)t->y);
+	ya = 1;
 	ydiff = (degre < 180) ? t->y + ya : t->y - ya;
 	x1 = ya / tan(rot);
 	xdiff = t->x + x1;
@@ -89,23 +89,33 @@ void	ft_trigo(t_t *t, float rot)
 
 int		ft_putkey(int c, t_t *t)
 {
-	if (c == W && t->tb[(int)t->y - 1][(int)t->x] == '0')
+	int x;
+	int y;
+
+	x = t->x;
+	y = t->y;
+	if (c == W )
 		ft_trigo(t, t->rot);
-	if (c == A && t->tb[(int)t->y][(int)t->x - 1] == '0')
+	if (c == A)
 		ft_trigo(t, t->rot - (M_PI/2));
-	if (c == S && t->tb[(int)t->y + 1][(int)t->x] == '0')
+	if (c == S )
 		ft_trigo(t, t->rot + M_PI);
-	if (c == D && t->tb[(int)t->y][(int)t->x + 1] == '0')
+	if (c == D)
 		ft_trigo(t, t->rot + (M_PI/2));
 	if (c == RIGHT)
-		t->rot += (float)(20 * M_PI / 180);	
+		t->rot += (float)(10 * M_PI / 180);	
 	if (c == LEFT)
-		t->rot -= (float)(20 * M_PI / 180);	
+		t->rot -= (float)(10 * M_PI / 180);	
 	if (t->rot > (float)(2 * M_PI))
 		t->rot -= (float)(2*M_PI);
 	if (t->rot < (float)(0))
 		t->rot += (float)(2*M_PI);
 	t->degre = t->rot * (180/M_PI);
+	if (t->tb[(int)t->y][(int)t->x] == '1')
+	{
+		t->y = y;
+		t->x = x;
+	}
 	ft_screen(t);
 	return (0);
 }

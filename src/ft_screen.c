@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/29 15:32:15 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/06 18:17:09 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ void		ft_screen(t_t *t)
 		ft_collomn(t, i);
 		t->minray += (angle * M_PI / 180.0);
 		t->degre = t->minray * (180.0 / M_PI);
-		i++;
+		i++;;
 	}
 }
