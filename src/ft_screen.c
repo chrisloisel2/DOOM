@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/06 18:17:09 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/11 18:11:07 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void		ft_check_horizontal_wall(t_t *t, float rot)
 		y2 = xa * tan(rot);
 		ydiff = t->y + y2;
 	}
-	t->murx = xdiff;
-	t->mury = ydiff;
+	t->murx = (int)xdiff;
+	t->mury = (int)ydiff;
 }
 
 void		ft_check_vertical_wall(t_t *t, float rot)
@@ -56,8 +56,8 @@ void		ft_check_vertical_wall(t_t *t, float rot)
 		x2 = ya / tan(rot);
 		xdiff = t->x + x2;
 	}
-	t->murx = xdiff;
-	t->mury = ydiff;
+	t->murx = (int)xdiff;
+	t->mury = (int)ydiff;
 }
 
 void		ft_regular_line(t_t *t, float rot)
@@ -78,8 +78,8 @@ void		ft_regular_line(t_t *t, float rot)
 		if (rot == 180)
 			x--;
 	}
-	t->murx = x;
-	t->mury = y;
+	t->murx = (int)x;
+	t->mury = (int)y;
 }
 
 void		ft_screen(t_t *t)
