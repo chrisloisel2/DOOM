@@ -1,6 +1,6 @@
 R 500 500
 
-NO ./textures/brick.xpm
+NO wall.xpm
 SO ./textures/blue.xpm
 WE ./textures/wood.xpm
 EA ./textures/grey.xpm

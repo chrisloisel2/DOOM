@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/11 18:11:07 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/15 15:55:06 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		ft_check_horizontal_wall(t_t *t, float rot)
 	float 	xa;
 	float 	y1;
 	float 	y2;
-	int 	xdiff;
-	int 	ydiff;
+	float 	xdiff;
+	float 	ydiff;
 
 	if (t->degre < 45 || t->degre > 315)
 		rot = M_PI - rot;
@@ -26,14 +26,14 @@ void		ft_check_horizontal_wall(t_t *t, float rot)
 	y1 = xa * tan(rot);
 	xdiff = (t->degre > 90 && t->degre < 270) ? t->x - xa++ : t->x + xa;
 	ydiff = t->y + y1;
-	while (t->tb[ydiff][xdiff] != '1' && xdiff > 0 && xdiff < t->maxx)
+	while (t->tb[(int)ydiff][(int)xdiff] != '1' && xdiff > 0 && xdiff < t->maxx)
 	{
 		xdiff = (t->degre > 90 && t->degre < 270) ? t->x - xa++ : t->x + xa++;
 		y2 = xa * tan(rot);
 		ydiff = t->y + y2;
 	}
-	t->murx = (int)xdiff;
-	t->mury = (int)ydiff;
+	t->murx = xdiff;
+	t->mury = ydiff;
 }
 
 void		ft_check_vertical_wall(t_t *t, float rot)
@@ -41,8 +41,8 @@ void		ft_check_vertical_wall(t_t *t, float rot)
 	float 	ya;
 	float 	x1;
 	float 	x2;
-	int 	xdiff;
-	int 	ydiff;
+	float	xdiff;
+	float 	ydiff;
 
 	if (t->degre > 180)
 		rot = M_PI - rot;
@@ -50,14 +50,14 @@ void		ft_check_vertical_wall(t_t *t, float rot)
 	ydiff = (t->degre < 180) ? t->y + ya : t->y - ya;
 	x1 = ya / tan(rot);
 	xdiff = t->x + x1;
-	while (t->tb[ydiff][xdiff] != '1' && ydiff < t->maxy && xdiff < t->maxx)
+	while (t->tb[(int)ydiff][(int)xdiff] != '1' && ydiff < t->maxy && xdiff < t->maxx)
 	{
 		ydiff = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
 		x2 = ya / tan(rot);
 		xdiff = t->x + x2;
 	}
-	t->murx = (int)xdiff;
-	t->mury = (int)ydiff;
+	t->murx = xdiff;
+	t->mury = ydiff;
 }
 
 void		ft_regular_line(t_t *t, float rot)
@@ -78,8 +78,8 @@ void		ft_regular_line(t_t *t, float rot)
 		if (rot == 180)
 			x--;
 	}
-	t->murx = (int)x;
-	t->mury = (int)y;
+	t->murx = x;
+	t->mury = y;
 }
 
 void		ft_screen(t_t *t)
