@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/15 15:55:06 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/16 18:39:22 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		ft_screen(t_t *t)
 	int 	i;
 
 	i = 0;
+	t->mur_h = 100;
 	t->cam_distance = (t->win_x/2) / tan(20);
 	t->minray = t->rot - (20 * (M_PI/180));
 	t->degre = t->minray * (180 / M_PI);

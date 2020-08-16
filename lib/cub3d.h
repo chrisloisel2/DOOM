@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/15 17:26:37 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/16 18:42:33 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct	t_s
 	float		mur_h;
 	float		mur_w;
 	float		regard;
+	float		disty;
+	float		distx;
 	float		mury;
 	float		murx;
 	float		cam_distance;
