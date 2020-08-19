@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:23:54 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/17 16:02:45 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/19 16:32:36 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,6 @@ int		ft_putkey(int c, t_t *t)
 	(c == A) ? ft_trigo(t, t->rot - (M_PI/4)) : 0;
 	(c == S) ? ft_trigo(t, t->rot + M_PI) : 0;
 	(c == D) ? ft_trigo(t, t->rot + (M_PI/4)) : 0;
-	if (c == ESC)
-		t->esc = 1;
-	else
-		t->esc = 0;
-	printf("->%d\n", t->esc);
 	(c == RIGHT) ? t->rot += (float)(10 * M_PI / 180) : 0;	
 	(c == LEFT) ? t->rot -= (float)(10 * M_PI / 180) : 0;	
 	(t->rot > (float)(2 * M_PI)) ? t->rot -= (float)(2*M_PI) : 0;

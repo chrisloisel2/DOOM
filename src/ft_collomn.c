@@ -6,20 +6,21 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 13:39:34 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/19 13:49:56 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/19 16:32:13 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-int		ft_get_h(t_t *t, int i)
+float		ft_get_h(t_t *t, int i)
 {
-	int y;
-	int x;
+	float y;
+	float x;
 
-	y = (t->mury - (int)t->mury) * 100;
-	x = (t->murx - (int)t->murx) * 100;
-	printf();
+	y = 0;
+	x = 0;
+	y = (t->mury - (int)t->mury);
+	x = (t->murx - (int)t->murx);
 	if (x > y)
 		return (x);
 	return (y);
@@ -39,7 +40,7 @@ int		ft_putpixel(t_t *t, float hauteur, int i)
 	while (index < hauteur && i < (t->win_x * t->win_y))
 	{
 		y = (index * n);
-		p = (float)(ft_get_h(t, i)) + ((float)t->texturel * (float)y);
+		p = (float)((ft_get_h(t, i)) * t->texturel) + ((float)t->texturel * (float)y);
 		t->si[i] = t->csno[(int)p];
 		index++;
 		i += t->win_x;
@@ -54,10 +55,6 @@ void	ft_collomn(t_t *t, int i)
 	int		milieu;
 
 	dist = pow(t->distx, 2) + pow(t->disty, 2);
-	if (t->rot > t->minray)
-		dist *= cos((t->rot - t->minray));
-	else
-		dist *= cos((t->minray - t->rot));
 	hauteur = (t->cam_distance * t->mur_h) / dist;
 	milieu = (t->win_x * (t->win_y / 2));
 	while (i < (t->win_x * t->win_y))
