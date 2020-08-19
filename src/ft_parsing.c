@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/27 07:25:31 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/17 14:34:28 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,5 @@ int		ft_parse(int fd, parse_t *parse, t_t *t)
 	ft_tb_made(parse, t);
 	ft_tb_fill(parse, t);
 	ft_search_map(parse, t);
-	i = 0;
-	while (i < t->maxy)
-	{
-		printf("->%s\n", t->tb[i]);
-		i++;
-	}
 	return (1);
 }

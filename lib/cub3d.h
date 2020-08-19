@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/16 18:42:33 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/17 13:11:34 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct	t_s
 	int			win_y;
 	int			ccolor;
 	int			fcolor;
+	int			texturel;
+	int			textureh;
 	int			f1;
 	int			f2;
 	int			f3;
