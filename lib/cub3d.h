@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/17 13:11:34 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/20 14:41:35 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,23 @@ typedef struct	parse_s
 	char 		*memory;
 }				parse_t;
 
+typedef struct	txt_s
+{
+	
+}				txt_t;
+
 typedef struct	t_s
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
 	void		*image;
+	float		*speed;
 	unsigned int 		*si;
 	unsigned int 		*csno;
 	int			demimap;
+	int			milieu;
+	int			milieuh;
+	int			milieub;
 	int			esc;
 	int			degre;
 	float		x;
@@ -107,6 +116,33 @@ typedef struct	t_s
 	char 		*cswe;
 	char 		*csea;
 	char 		*s;
+
+	void		*ptrno;
+	void		*ptrso;
+	void		*ptrwe;
+	void		*ptrea;
+
+	int			nol;
+	int			sol;
+	int			wel;
+	int			eal;
+	int			noh;
+	int			soh;
+	int			weh;
+	int			eah;
+	int			nosl;
+	int			sosl;
+	int			wesl;
+	int			easl;
+
+	int			nno;
+	int			nso;
+	int			nwe;
+	int			nea;
+	unsigned int	*strno;
+	unsigned int	*strso;
+	unsigned int	*strwe;
+	unsigned int	*strea;
 }				t_t;
 
 void			ft_screen(t_t *t);

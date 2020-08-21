@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/19 16:31:19 by lchristo         ###   ########.fr       */
+/*   Updated: 2020/08/20 13:50:49 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		ft_screen(t_t *t)
 	t->minray = t->rot - (20 * (M_PI/180));
 	t->degre = t->minray * (180 / M_PI);
 	angle = 40.0/t->win_x;
-	while (i <= t->win_x)
+	while (i < t->win_x)
 	{
 		if (t->degre == 90 || t->degre == 270 || t->degre == 0 || t->degre == 180)
 			ft_regular_line(t, t->degre);
