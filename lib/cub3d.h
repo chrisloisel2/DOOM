@@ -73,8 +73,6 @@ typedef struct	t_s
 	int		casey;
 	double		dirx;
 	double		diry;
-	double		sidedistx;
-	double		sidedisty;
 	double		planex;
 	double		planey;
 	float		mur_h;
@@ -94,6 +92,17 @@ typedef struct	t_s
 	int			ccolor;
 	int			fcolor;
 
+	double		lineheight;
+	double		rdirx;
+	double		rdiry;
+
+	int				stepx;
+	int				stepy;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	double			sidedistx;
+	double			sidedisty;
 	char 		*no;
 	char 		*so;
 	char 		*we;

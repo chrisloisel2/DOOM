@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2021/01/05 19:42:00 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/01/13 17:18:18 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void		ft_screen(t_t *t)
 {
-	float			angle;
-	float			min;
-	float			max;
 	int				x;
 	int				stepx;
 	int				stepy;
@@ -28,11 +25,7 @@ void		ft_screen(t_t *t)
 	double			sidedistx;
 	double			sidedisty;
 	double			camerax;
-	double			time;
-	double			oldtime;
-	int				de;
 	int				hit;
-	int				p;
 	double			wallx;
 	int				texx;
 	int				y;
@@ -40,7 +33,6 @@ void		ft_screen(t_t *t)
 	unsigned int	color;
 
 	x = 0;
-	angle = 40.0 / t->win_x;
 	while (x < t->win_x)
 	{
 		camerax = ((x / (double)t->win_x) * 2) - 1;
@@ -105,11 +97,10 @@ void		ft_screen(t_t *t)
 			wallx = t->y + perpwalldist * raydiry;
 		else
 			wallx = t->x + perpwalldist * raydirx;
-		de = 0;
-		int	ix = (wallx - (int)wallx) * t->th[0];
+		int	ix = (wallx - (int)wallx) * t->th[1];
 		while (y < (t->win_x * t->win_y))
 		{
-			float yolo = 0;
+			int		yolo = 0;
 			float index = 0;
 			float res;				
 			if (y > (t->drawEnd * t->win_x))
@@ -120,11 +111,11 @@ void		ft_screen(t_t *t)
 			{
 				float hauteur;
 				hauteur = (t->drawEnd - t->drawStart);
-				yolo = (index / hauteur);
-				res = (yolo + ix) * t->th[0];
-				color = t->tx[0][(int)(res)];
-//				if (t->side == 1)
-//					color = (color> 1) & 8355711;
+				yolo = (index / hauteur) * t->th[1];
+				res = yolo * t->th[1] + ix;
+				color = t->tx[1][(int)(res)];
+				if (t->side == 1)
+					color = (color >> 1) & 8355711;
 				t->si[y] = color;
 				y += t->win_x;
 				index++;

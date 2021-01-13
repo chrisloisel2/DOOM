@@ -1,4 +1,4 @@
-R 600 600
+R 1600 1600
 
 NO ./textures/wall.xpm
 SO ./textures/doom.xpm
