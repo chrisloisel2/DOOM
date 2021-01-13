@@ -6,102 +6,132 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 04:57:07 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/20 13:50:49 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:42:00 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-void		ft_check_horizontal_wall(t_t *t, float rot)
-{
-	float 	xa;
-	float 	y1;
-	float 	y2;
-
-	if (t->degre < 45 || t->degre > 315)
-		rot = M_PI - rot;
-	xa = (t->x - (int)t->x);
-	y1 = xa * tan(rot);
-	t->murx = (t->degre > 90 && t->degre < 270) ? t->x - xa : t->x + xa;
-	t->mury = t->y + y1;
-	while (t->tb[(int)t->mury][(int)t->murx] != '1' && t->murx > 0 && t->murx < t->maxx)
-	{
-		t->murx = (t->degre > 90 && t->degre < 270) ? t->x - xa++ : t->x + xa++;
-		y2 = xa * tan(rot);
-		t->mury = t->y + y2;
-	}
-	t->distx = t->x - t->murx;
-	t->disty = t->y - t->mury;
-}
-
-void		ft_check_vertical_wall(t_t *t, float rot)
-{
-	float 	ya;
-	float 	x1;
-	float 	x2;
-
-	if (t->degre > 180)
-		rot = M_PI - rot;
-	ya = (t->y - (int)t->y);
-	t->mury = (t->degre < 180) ? t->y + ya : t->y - ya;
-	x1 = ya / tan(rot);
-	t->murx = t->x + x1;
-	while (t->tb[(int)t->mury][(int)t->murx] != '1' && t->mury < t->maxy && t->murx < t->maxx)
-	{
-		t->mury = (t->degre < 180) ? t->y - ya++ : t->y + ya++;
-		x2 = ya / tan(rot);
-		t->murx = t->x + x2;
-	}
-	t->distx = t->x - t->murx;
-	t->disty = t->y - t->mury;
-}
-
-void		ft_regular_line(t_t *t, float rot)
-{
-	float	x;
-	float	y;
-
-	x = t->x;
-	y = t->y;
-	while (t->tb[(int)y][(int)x] != '1')	
-	{
-		if (rot == 90)
-			y--;
-		if (rot == 270)
-			y++;
-		if (rot == 0)
-			x++;
-		if (rot == 180)
-			x--;
-	}
-	t->murx = x;
-	t->mury = y;
-	t->distx = t->x - t->murx;
-	t->disty = t->y - t->mury;
-}
-
 void		ft_screen(t_t *t)
 {
-	float	angle;
-	float	min;
-	float	max;
-	int 	i;
+	float			angle;
+	float			min;
+	float			max;
+	int				x;
+	int				stepx;
+	int				stepy;
+	double			raydirx;
+	double			raydiry;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	double			sidedistx;
+	double			sidedisty;
+	double			camerax;
+	double			time;
+	double			oldtime;
+	int				de;
+	int				hit;
+	int				p;
+	double			wallx;
+	int				texx;
+	int				y;
+	double			lineheight;
+	unsigned int	color;
 
-	i = 0;
-	t->minray = t->rot - (20 * (M_PI/180));
-	t->degre = t->minray * (180 / M_PI);
-	angle = 40.0/t->win_x;
-	while (i < t->win_x)
+	x = 0;
+	angle = 40.0 / t->win_x;
+	while (x < t->win_x)
 	{
-		if (t->degre == 90 || t->degre == 270 || t->degre == 0 || t->degre == 180)
-			ft_regular_line(t, t->degre);
-		else if ((t->degre >= 45 && t->degre <= 135) || (t->degre >= 225 && t->degre <= 315))
-			ft_check_vertical_wall(t, t->minray);
+		camerax = ((x / (double)t->win_x) * 2) - 1;
+		raydirx = t->dirx + (t->planex * camerax);
+		raydiry = t->diry + (t->planey * camerax);
+		t->casey = (int)t->y;
+		t->casex = (int)t->x;
+		deltadistx = sqrt(1 + (raydiry * raydiry) / (raydirx * raydirx));
+		deltadisty = sqrt(1 + (raydirx * raydirx) / (raydiry * raydiry));
+		t->side = 0;
+		hit = 0;
+		if (raydirx < 0)
+		{
+			stepx = -1;
+			sidedistx = (t->x - t->casex) * deltadistx;
+		}
 		else
-			ft_check_horizontal_wall(t, t->minray);
-		ft_collomn(t, i);
-		t->minray += (angle * M_PI / 180.0);
-		t->degre = t->minray * (180.0 / M_PI);
-		i++;
+		{
+			stepx = 1;
+			sidedistx = (t->casex + 1.0 - t->x) * deltadistx;
+		}
+		if (raydiry < 0)
+		{
+			stepy = -1;
+			sidedisty = (t->y - t->casey) * deltadisty;
+		}
+		else
+		{
+			stepy = 1;
+			sidedisty = (t->casey + 1.0 - t->y) * deltadisty;
+		}
+		while (hit == 0)
+		{
+			if (sidedistx < sidedisty)
+			{
+				sidedistx += deltadistx;
+				t->casex += stepx;
+				t->side = 0;
+			}
+			else
+			{
+				sidedisty += deltadisty;
+				t->casey += stepy;
+				t->side = 1;
+			}
+			if (t->tb[t->casey][t->casex] == '1')
+				hit = 1;
+		}
+		if (t->side == 0)
+			perpwalldist = (t->casex - t->x + (1 - stepx) / 2) / raydirx;
+		else
+			perpwalldist = (t->casey - t->y + (1 - stepy) / 2) / raydiry;
+		lineheight = (t->win_y / perpwalldist);
+		t->drawStart = -lineheight / 2 + t->win_y / 2;
+		if (t->drawStart < 0)
+			t->drawStart = 0;
+		t->drawEnd = lineheight / 2 + t->win_y / 2;
+		if (t->drawEnd >= t->win_y)
+			t->drawEnd = t->win_y - 1;
+		y = x;
+		if (t->side == 0)
+			wallx = t->y + perpwalldist * raydiry;
+		else
+			wallx = t->x + perpwalldist * raydirx;
+		de = 0;
+		int	ix = (wallx - (int)wallx) * t->th[0];
+		while (y < (t->win_x * t->win_y))
+		{
+			float yolo = 0;
+			float index = 0;
+			float res;				
+			if (y > (t->drawEnd * t->win_x))
+				t->si[y] = t->fcolor;
+			if (y < (t->drawStart * t->win_x))
+				t->si[y] = t->ccolor;
+			while (y >= (t->drawStart * t->win_x) && y <= (t->drawEnd * t->win_x))
+			{
+				float hauteur;
+				hauteur = (t->drawEnd - t->drawStart);
+				yolo = (index / hauteur);
+				res = (yolo + ix) * t->th[0];
+				color = t->tx[0][(int)(res)];
+//				if (t->side == 1)
+//					color = (color> 1) & 8355711;
+				t->si[y] = color;
+				y += t->win_x;
+				index++;
+			}
+			y += t->win_x;
+		}
+		x++;
 	}
+	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image, 0, 0);
 }

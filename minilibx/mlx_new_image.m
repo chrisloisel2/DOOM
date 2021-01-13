@@ -178,7 +178,7 @@ int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
 	    {
 	      [(id)(win->winid) selectGLContext];
 	      glDeleteBuffers(1, &(ctx->next->vbuffer));
-	      glDeleteTextures(1, &(ctx->next->texture));
+	      glDeleteTextures(1, &(ctx->next->tx));
 	      ctx_to_del = ctx->next;
 	      ctx->next = ctx->next->next;
 	      free(ctx_to_del);

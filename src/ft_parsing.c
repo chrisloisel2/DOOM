@@ -50,13 +50,13 @@ void	ft_parse_nbr(t_t *t, char *line)
 	}
 	if (line[0] == 'C' && line[1] == ' ')
 	{
-		t->c1 = ft_atoi(line + 2);
+		t->ccolor = ft_atoi(line + 2);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		t->c2 = ft_atoi(line + i++);
+		t->ccolor = (t->ccolor << 8) + ft_atoi(line + i++);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		t->c3 = ft_atoi(line + i);
+		t->ccolor = (t->ccolor << 8) + ft_atoi(line + i);
 	}
 }
 
@@ -77,13 +77,13 @@ void	ft_parse_text(t_t *t, char *line)
 		t->s = ft_recup_str(line + 2);
 	if (line[0] == 'F' && line[1] == ' ')
 	{
-		t->f1 = ft_atoi(line + 2);
+		t->fcolor = ft_atoi(line + 2);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		t->f2 = ft_atoi(line + i++);
+		t->fcolor = (t->fcolor << 8) + ft_atoi(line + i++);
 		while (line[i - 1] != ',' && line[i] != '\0')
 			i++;
-		t->f3 = ft_atoi(line + i);
+		t->fcolor = (t->fcolor << 8) + ft_atoi(line + i);
 	}
 }
 

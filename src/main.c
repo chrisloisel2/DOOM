@@ -12,57 +12,71 @@
 
 #include "../lib/cub3d.h"
 
+void	ft_recuperation(t_t *t)
+{
+	int	i;
+	int un;
+	int deux;
+	int trois;
+	int quatre;
+
+	un = 0;
+	deux = 0;
+	trois = 0;
+	quatre = 0;
+	i = ft_strlen(mlx_get_data_addr(t->ptrno, &t->nno, &t->nosl, &un));
+	t->tx[0] = malloc(sizeof(unsigned int) * i);
+	t->tx[0] = (unsigned int *)mlx_get_data_addr(t->ptrno, &t->nno, &t->nosl, &un);
+	i = ft_strlen(mlx_get_data_addr(t->ptrea, &t->nea, &t->easl, &deux));
+	t->tx[1] = malloc(sizeof(unsigned int) * i);
+	t->tx[1] = (unsigned int *)mlx_get_data_addr(t->ptrea, &t->nea, &t->easl, &deux);
+	i = ft_strlen(mlx_get_data_addr(t->ptrwe, &t->nwe, &t->wesl, &trois));
+	t->tx[2] = malloc(sizeof(unsigned int) * i);
+	t->tx[2] = (unsigned int *)mlx_get_data_addr(t->ptrwe, &t->nwe, &t->wesl, &trois);
+	i = ft_strlen(mlx_get_data_addr(t->ptrso, &t->nso, &t->sosl, &quatre));
+	t->tx[3] = malloc(sizeof(unsigned int) * i);
+	t->tx[3] = (unsigned int *)mlx_get_data_addr(t->ptrso, &t->nso, &t->sosl, &quatre);
+}
+
 void	ft_recup(t_t *t)
+{
+	t->tx = malloc(sizeof(unsigned int *) * 4);
+	t->tl = malloc(sizeof(int) * 4);
+	t->th = malloc(sizeof(int) * 4);
+	t->ptrno = mlx_xpm_file_to_image(t->mlx_ptr, t->no, &t->tl[0], &t->th[0]);
+	t->ptrea = mlx_xpm_file_to_image(t->mlx_ptr, t->ea, &t->tl[1], &t->th[1]);
+	t->ptrwe = mlx_xpm_file_to_image(t->mlx_ptr, t->we, &t->tl[2], &t->th[2]);
+	t->ptrso = mlx_xpm_file_to_image(t->mlx_ptr, t->so, &t->tl[3], &t->th[3]);
+	ft_recuperation(t);
+}
+
+void	ft_display(t_t *t)
 {
 	int huit;
 	int un;
 	int sl;
 
-	huit = 3;
 	un = 1;
-	sl = 0;
-	t->mlx_ptr = mlx_init();
-	t->mlx_win = mlx_new_window(t->mlx_ptr, t->win_x, t->win_y, "DOOM");
-	t->ptrno = mlx_xpm_file_to_image(t->mlx_ptr, t->no, &t->nol, &t->noh);
-	t->ptrso = mlx_xpm_file_to_image(t->mlx_ptr, t->so, &t->sol, &t->soh);
-//	txt->we = mlx_xpm_file_to_image(t->mlx_ptr, t->we, &txt->wel, &txt->weh);
-//	txt->ea = mlx_xpm_file_to_image(t->mlx_ptr, t->ea, &txt->eal, &txt->eah);
-
-	t->strno = (unsigned int *)mlx_get_data_addr(t->ptrno, &t->nno, &t->nosl, &un);
-	t->strso = (unsigned int *)mlx_get_data_addr(t->ptrso, &t->nso, &t->sosl, &un);
-//	txt->strwe = (unsigned int *)mlx_get_data_addr(txt->we, &txt->nwe, &txt->wesl, &un);
-//	txt->strea = (unsigned int *)mlx_get_data_addr(txt->ea, &txt->nea, &txt->easl, &un);
-}
-
-void	ft_speed(t_t *t)
-{
-	int i;
-
-	i = 0;
-	while (i <= t->win_x)
-	{
-		t->speed[i] = 0;
-		i++;
-	}
+	huit = 3;
+	sl = t->win_x;
+	t->image = mlx_new_image(t->mlx_ptr, t->win_x, t->win_y);
+	t->si = (unsigned int *)mlx_get_data_addr(t->image, &huit, &sl, &un);
 }
 
 void	ft_start(parse_t *parse, t_t *t)
 {
-	ft_recup(t);
-	t->mur_h = t->win_y / 10;
-	t->speed = malloc(sizeof(int) * t->win_x);
-	ft_speed(t);
-	t->cam_distance = (t->win_x/2) / tan(20);
+	t->mlx_ptr = mlx_init();
+	t->mlx_win = mlx_new_window(t->mlx_ptr, t->win_x, t->win_y, "DOOM");
 	ft_display(t);
+	ft_recup(t);
 	ft_screen(t);
-	mlx_hook(t->mlx_win, 2, 0, ft_putkey, t);
+	mlx_hook(t->mlx_win, 2, (1L << 0), &ft_putkey, t);
 	mlx_loop(t->mlx_ptr);
 }
 
 int		main(int argc, char **argv)
 {
 	t_t			t;
-	txt_t		txt;
 	parse_t		parse;
 	int			fd;
 

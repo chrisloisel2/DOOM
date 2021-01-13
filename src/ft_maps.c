@@ -6,19 +6,11 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:06:46 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/17 14:36:15 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/01/05 20:39:26 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
-
-int		ft_white_space(char c)
-{
-	if (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c == '\f' ||
-			c == '\r')
-		return (1);
-	return (0);
-}
 
 void	ft_two(parse_t *parse, map_t *map, t_t *t)
 {
@@ -106,22 +98,26 @@ int		ft_get_player(char c, t_t *t)
 {
 	if (c == 'N')
 	{
-		t->rot = M_PI/2;
+		t->diry = -1.0;
+		t->dirx = 0.0;
 		return (1);
 	}
 	if (c == 'E')
 	{
-		t->rot = 0;
+		t->diry = 0.0;
+		t->dirx = 1.0;
 		return (1);
 	}
 	if (c == 'S')
 	{
-		t->rot = (3 * M_PI)/2;
+		t->diry = 1.0;
+		t->dirx = 0.0;
 		return (1);
 	}
 	if (c == 'W')
 	{
-		t->rot = M_PI;
+		t->diry = 0.0;
+		t->dirx = -1.0;
 		return (1);
 	}
 	return (0);
@@ -145,6 +141,7 @@ void	ft_map_check(parse_t *parse, map_t *map, t_t *t)
 				r++;
 				t->x = x;
 				t->y = y;
+				t->tb[y][x] = '0';
 			}
 			(r > 1) ? map->error = 1 : 0;
 			x++;

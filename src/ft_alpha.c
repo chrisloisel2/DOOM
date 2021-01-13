@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 01:14:15 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/07 02:25:13 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/01/05 20:40:17 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 int		ft_alpha(char c)
 {
 	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+int		ft_white_space(char c)
+{
+	if (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c == '\f' ||
+			c == '\r')
 		return (1);
 	return (0);
 }

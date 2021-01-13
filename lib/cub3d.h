@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 22:25:59 by lchristo          #+#    #+#             */
-/*   Updated: 2020/08/20 14:41:35 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/01/05 20:21:57 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ typedef struct	parse_s
 	char 		*memory;
 }				parse_t;
 
-typedef struct	txt_s
-{
-	
-}				txt_t;
-
 typedef struct	t_s
 {
 	void		*mlx_ptr;
@@ -69,25 +64,27 @@ typedef struct	t_s
 	void		*image;
 	float		*speed;
 	unsigned int 		*si;
-	unsigned int 		*csno;
 	int			demimap;
-	int			milieu;
-	int			milieuh;
-	int			milieub;
-	int			esc;
-	int			degre;
-	float		x;
-	float		y;
-	float		minray;
-	float		maxray;
-	float 		rot;
+	double		x;
+	double		y;
+	double		camerax;
+	double		cameray;
+	int		casex;
+	int		casey;
+	double		dirx;
+	double		diry;
+	double		sidedistx;
+	double		sidedisty;
+	double		planex;
+	double		planey;
 	float		mur_h;
 	float		mur_w;
-	float		regard;
 	float		disty;
 	float		distx;
-	float		mury;
-	float		murx;
+	int			*th;
+	int			*tl;
+	float		drawEnd;
+	float		drawStart;
 	float		cam_distance;
 	char 		**tb;
 	int			maxy;
@@ -96,27 +93,13 @@ typedef struct	t_s
 	int			win_y;
 	int			ccolor;
 	int			fcolor;
-	int			texturel;
-	int			textureh;
-	int			f1;
-	int			f2;
-	int			f3;
-	int			c1;
-	int			c2;
-	int			c3;
+
 	char 		*no;
 	char 		*so;
 	char 		*we;
 	char 		*ea;
-	void 		*im_no;
-	void 		*im_so;
-	void 		*im_we;
-	void 		*im_ea;
-	char 		*csso;
-	char 		*cswe;
-	char 		*csea;
-	char 		*s;
 
+	char 		*s;
 	void		*ptrno;
 	void		*ptrso;
 	void		*ptrwe;
@@ -126,23 +109,30 @@ typedef struct	t_s
 	int			sol;
 	int			wel;
 	int			eal;
+
 	int			noh;
 	int			soh;
 	int			weh;
 	int			eah;
+
 	int			nosl;
 	int			sosl;
 	int			wesl;
 	int			easl;
 
+	int			side;
+
 	int			nno;
 	int			nso;
 	int			nwe;
 	int			nea;
-	unsigned int	*strno;
-	unsigned int	*strso;
-	unsigned int	*strwe;
-	unsigned int	*strea;
+
+	unsigned int	*txtno;
+	unsigned int	*txtso;
+	unsigned int	*txtwe;
+	unsigned int	*txtea;
+
+	unsigned int	**tx;
 }				t_t;
 
 void			ft_screen(t_t *t);
@@ -164,5 +154,13 @@ void			ft_collomn(t_t *t, int i);
 void			ft_ceiling(t_t *t);
 void			ft_floor(t_t *t);
 int				ft_putkey(int c, t_t *t);
+void			ft_print_map(t_t *t);
+void			ft_pixel_texture(t_t *t, int y, double x);
+void			ft_putpixel(t_t *t, double hauteur, int i, double index);
+void			ft_avant(t_t *t, double vitesse);
+void			ft_arriere(t_t *t, double vitesse);
+void			ft_droite(t_t *t, double vitesse);
+void			ft_gauche(t_t *t, double vitesse);
+void			ft_rot(t_t *t, double r);
 
 #endif

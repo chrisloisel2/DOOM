@@ -6,7 +6,7 @@
 /*   By: lchristo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 03:10:08 by lchristo          #+#    #+#             */
-/*   Updated: 2020/07/29 12:42:25 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/01/05 20:38:39 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_tb_fill(parse_t *parse, t_t *t)
 	while (parse->memory[i] != '\0' && y < t->maxy)
 	{
 		if (t->demimap == t->maxy && parse->memory[i] == ' ')
-			i ++;
+			i++;
 		t->tb[y][ib] = parse->memory[i];
 		ib++;
 		i++;
@@ -78,8 +78,7 @@ void	ft_tb_made(parse_t *parse, t_t *t)
 	p = 0;
 	while (parse->memory[i] != '\0')
 	{
-		if (parse->memory[i] == '\n')
-			y++;
+		(parse->memory[i] == '\n') ? y++ : 0;
 		i++;
 	}
 	t->maxy = y;
@@ -88,17 +87,12 @@ void	ft_tb_made(parse_t *parse, t_t *t)
 	y = 0;
 	while (parse->memory[i] != '\0')
 	{
-		while (parse->memory[i] != '\n' && parse->memory != '\0')
-		{
+		while (parse->memory[i++] != '\n' && parse->memory[i] != '\0')
 			y++;
-			i++;
-		}
-		if (t->demimap == t->maxy)
-			y = y/2;;
-		t->tb[p] = malloc(sizeof(char) * y + 1);
+		(t->demimap == t->maxy) ? y = y / 2 : 0;
+		t->tb[p++] = malloc(sizeof(char) * y + 1);
 		y = 0;
 		i++;
-		p++;
 	}
 }
 
