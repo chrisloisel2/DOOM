@@ -22,19 +22,7 @@
 # include <string.h>
 # include "ft_printf.h"
 #include "get_next_line.h"
-# include <mlx.h>
-
-#define W 13
-#define ESC 53
-#define A 0
-#define S 1
-#define D 2
-
-
-#define UP 126
-#define DOWN 125
-#define RIGHT 124
-#define LEFT 123
+# include "../minilibx/mlx.h"
 
 typedef struct	map_s
 {
@@ -91,6 +79,9 @@ typedef struct	t_s
 	int			win_y;
 	int			ccolor;
 	int			fcolor;
+
+	double			raydirx;
+	double			raydiry;
 
 	double		lineheight;
 	double		rdirx;
@@ -164,12 +155,15 @@ void			ft_ceiling(t_t *t);
 void			ft_floor(t_t *t);
 int				ft_putkey(int c, t_t *t);
 void			ft_print_map(t_t *t);
-void			ft_pixel_texture(t_t *t, int y, double x);
+void			ft_pixel_texture(t_t *t, int y);
 void			ft_putpixel(t_t *t, double hauteur, int i, double index);
 void			ft_avant(t_t *t, double vitesse);
 void			ft_arriere(t_t *t, double vitesse);
 void			ft_droite(t_t *t, double vitesse);
 void			ft_gauche(t_t *t, double vitesse);
 void			ft_rot(t_t *t, double r);
+void			ft_cheapdda(t_t *t, float lineheight);
+void			ft_setupdda(t_t *t, int x);
+
 
 #endif

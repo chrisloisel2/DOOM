@@ -39,7 +39,8 @@ SRC = 		src/main.c\
 			src/ft_collomn.c\
 			src/ft_keys.c\
 			src/ft_texture.c\
-			src/ft_move.c
+			src/ft_move.c\
+			src/ft_dda.c
 
 
 MLX = minilibx
