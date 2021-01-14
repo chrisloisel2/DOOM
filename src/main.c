@@ -20,22 +20,24 @@ void	ft_recuperation(t_t *t)
 	int trois;
 	int quatre;
 
-	un = 0;
-	deux = 0;
 	trois = 0;
 	quatre = 0;
 	i = ft_strlen(mlx_get_data_addr(t->ptrno, &t->nno, &t->nosl, &un));
 	t->tx[0] = malloc(sizeof(unsigned int) * i);
-	t->tx[0] = (unsigned int *)mlx_get_data_addr(t->ptrno, &t->nno, &t->nosl, &un);
+	t->tx[0] =
+	(unsigned int *)mlx_get_data_addr(t->ptrno, &t->nno, &t->nosl, &un);
 	i = ft_strlen(mlx_get_data_addr(t->ptrea, &t->nea, &t->easl, &deux));
 	t->tx[1] = malloc(sizeof(unsigned int) * i);
-	t->tx[1] = (unsigned int *)mlx_get_data_addr(t->ptrea, &t->nea, &t->easl, &deux);
+	t->tx[1] =
+	(unsigned int *)mlx_get_data_addr(t->ptrea, &t->nea, &t->easl, &deux);
 	i = ft_strlen(mlx_get_data_addr(t->ptrwe, &t->nwe, &t->wesl, &trois));
 	t->tx[2] = malloc(sizeof(unsigned int) * i);
-	t->tx[2] = (unsigned int *)mlx_get_data_addr(t->ptrwe, &t->nwe, &t->wesl, &trois);
+	t->tx[2] =
+	(unsigned int *)mlx_get_data_addr(t->ptrwe, &t->nwe, &t->wesl, &trois);
 	i = ft_strlen(mlx_get_data_addr(t->ptrso, &t->nso, &t->sosl, &quatre));
 	t->tx[3] = malloc(sizeof(unsigned int) * i);
-	t->tx[3] = (unsigned int *)mlx_get_data_addr(t->ptrso, &t->nso, &t->sosl, &quatre);
+	t->tx[3] =
+	(unsigned int *)mlx_get_data_addr(t->ptrso, &t->nso, &t->sosl, &quatre);
 }
 
 void	ft_recup(t_t *t)

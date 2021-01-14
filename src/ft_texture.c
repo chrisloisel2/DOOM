@@ -16,17 +16,17 @@ int		ft_side(t_t *t)
 {
 	if (t->side == 0)
 	{
-		if (t->raydirx > 0)
+		if (t->rayx > 0)
 			return (2);
 		else
 			return (1);
 	}
 	if (t->side == 1)
 	{
-		if (t->raydiry > 0)
-			return (3); //sud
+		if (t->rayy > 0)
+			return (3);
 		else
-			return (0); // nord
+			return (0);
 	}
 	return (1);
 }
@@ -37,7 +37,7 @@ void	ft_diff_texture(t_t *t, int y, int index, int x)
 	float			hauteur;
 	int				ygrek;
 	unsigned int	color;
-	int 			tex;
+	int				tex;
 
 	tex = ft_side(t);
 	hauteur = (t->drawEnd - t->drawStart);
@@ -57,11 +57,11 @@ void	ft_pixel_texture(t_t *t, int y)
 
 	index = 0;
 	if (t->side == 0)
-		wallx = t->y + t->perpwalldist * t->raydiry;
+		wallx = t->y + t->perpwalldist * t->rayy;
 	else
-		wallx = t->x + t->perpwalldist * t->raydirx;
+		wallx = t->x + t->perpwalldist * t->rayx;
 	while (y < (t->win_x * t->win_y))
-	{			
+	{
 		(y > (t->drawEnd * t->win_x)) ? t->si[y] = t->fcolor : 0;
 		(y < (t->drawStart * t->win_x)) ? t->si[y] = t->ccolor : 0;
 		while (y >= (t->drawStart * t->win_x) && y <= (t->drawEnd * t->win_x))

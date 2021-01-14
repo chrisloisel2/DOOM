@@ -80,8 +80,8 @@ typedef struct	t_s
 	int			ccolor;
 	int			fcolor;
 
-	double			raydirx;
-	double			raydiry;
+	double			rayx;
+	double			rayy;
 
 	double		lineheight;
 	double		rdirx;
@@ -164,6 +164,7 @@ void			ft_gauche(t_t *t, double vitesse);
 void			ft_rot(t_t *t, double r);
 void			ft_cheapdda(t_t *t, float lineheight);
 void			ft_setupdda(t_t *t, int x);
+int				ft_get_player_two(char c, t_t *t);
 
 
 #endif

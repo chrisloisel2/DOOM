@@ -24,6 +24,11 @@ void		ft_screen(t_t *t)
 		ft_setupdda(t, x);
 		ft_cheapdda(t, lineheight);
 		ft_pixel_texture(t, x);
+		lineheight = (t->win_y / t->perpwalldist);
+		t->drawStart = -lineheight / 2 + t->win_y / 2;
+		(t->drawStart < 0) ? t->drawStart = 0 : 0;
+		t->drawEnd = lineheight / 2 + t->win_y / 2;
+		(t->drawEnd >= t->win_y) ? t->drawEnd = t->win_y - 1 : 0;
 		x++;
 	}
 	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image, 0, 0);
