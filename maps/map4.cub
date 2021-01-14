@@ -1,8 +1,10 @@
 R  1080 720
-NO ./textures/brick.xpm
-SO ./textures/blue.xpm
-WE ./textures/wood.xpm
-EA ./textures/grey.xpm
+
+NO ./textures/wall.xpm
+SO ./textures/doom.xpm
+WE ./textures/mur.xpm
+EA ./textures/eagle.xpm
+
 
 S ./textures/chalice.xpm
 F 224,172,105

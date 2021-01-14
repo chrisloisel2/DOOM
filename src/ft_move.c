@@ -31,8 +31,8 @@ void	ft_droite(t_t *t, double vitesse)
 	double y;
 	double x;
 
-	y = t->y - (double)((t->diry / 2) * vitesse);
-	x = t->x - (double)((t->dirx / 2) * vitesse);
+	y = t->y + (double)(t->dirx * -cos(90)) * vitesse;
+	x = t->x + (double)(t->diry * -sin(90)) * vitesse;
 	if (t->tb[(int)y][(int)x] == '0')
 	{
 		t->y = y;
@@ -45,8 +45,8 @@ void	ft_gauche(t_t *t, double vitesse)
 	double y;
 	double x;
 
-	y = t->y + (double)((t->diry / 5) * vitesse);
-	x = t->x + (double)((t->dirx * 5) * vitesse);
+	y = t->y + (double)(t->dirx * cos(90) * vitesse);
+	x = t->x + (double)(t->diry * sin(90) * vitesse);
 	if (t->tb[(int)y][(int)x] == '0')
 	{
 		t->y = y;

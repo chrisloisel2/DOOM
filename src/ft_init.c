@@ -14,10 +14,6 @@
 
 void	ft_init(parse_t *parse, t_t *t)
 {
-	t->planex = 0.66;
-	t->planey = 0.0;
-	t->dirx = 0;
-	t->diry = -1;
 	t->image = 0;
 	t->demimap = 0;
 	t->x = 0;

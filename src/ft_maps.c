@@ -100,22 +100,30 @@ int		ft_get_player(char c, t_t *t)
 	{
 		t->diry = -1.0;
 		t->dirx = 0.0;
+		t->planex = 0.66;
+		t->planey = 0.0;
 		return (1);
 	}
 	if (c == 'E')
 	{
+		t->planex = 0.00;
+		t->planey = 0.66;
 		t->diry = 0.0;
 		t->dirx = 1.0;
 		return (1);
 	}
 	if (c == 'S')
 	{
+		t->planex = -0.66;
+		t->planey = 0.0;
 		t->diry = 1.0;
 		t->dirx = 0.0;
 		return (1);
 	}
 	if (c == 'W')
 	{
+		t->planex = 0.00;
+		t->planey = -0.66;
 		t->diry = 0.0;
 		t->dirx = -1.0;
 		return (1);

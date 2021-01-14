@@ -17,16 +17,16 @@ int		ft_side(t_t *t)
 	if (t->side == 0)
 	{
 		if (t->raydirx > 0)
-			return (3);
-		else
 			return (2);
+		else
+			return (1);
 	}
 	if (t->side == 1)
 	{
 		if (t->raydiry > 0)
-			return (0);
+			return (3); //sud
 		else
-			return (1);
+			return (0); // nord
 	}
 	return (1);
 }

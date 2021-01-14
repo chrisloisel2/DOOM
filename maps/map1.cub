@@ -1,9 +1,9 @@
 R 500 500
 
-NO ./textures/brick.xpm
-SO ./textures/blue.xpm
-WE ./textures/wood.xpm
-EA ./textures/grey.xpm
+NO ./textures/wall.xpm
+SO ./textures/doom.xpm
+WE ./textures/mur.xpm
+EA ./textures/eagle.xpm
 
 S ./textures/barrel.xpm
 F 40,50,20
