@@ -14,10 +14,20 @@
 
 int		ft_side(t_t *t)
 {
-	if (t->side < 0)
-		return (3);
-	if (t->side > 0)
-		return (0);
+	if (t->side == 0)
+	{
+		if (t->raydirx > 0)
+			return (3);
+		else
+			return (2);
+	}
+	if (t->side == 1)
+	{
+		if (t->raydiry > 0)
+			return (0);
+		else
+			return (1);
+	}
 	return (1);
 }
 
